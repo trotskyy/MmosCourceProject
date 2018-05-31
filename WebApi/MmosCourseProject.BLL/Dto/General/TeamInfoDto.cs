@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,25 +10,44 @@ namespace MmosCourseProject.BLL.Dto.General
     /// <summary>
     /// Provides integral characteristics of teams. Via recursion. Dto for TeamInfo VIEW ! Only Get() operations
     /// </summary>
-    public class TeamInfoDto
+    [DataContract]
+	public class TeamInfoDto
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int TeamLeadId { get; set; }
-        public int? ParentTeamId { get; set; }
-        public int? TotalPeopleCount { get; set; }
-        public int? SuperiorsCount { get; set; }
-        public int? SubteamsCount { get; set; }
-        public int? TotalTasksCount { get; set; }
-        public int? NewTasksCount { get; set; }
-        public int? TasksInProgressCount { get; set; }
-        public int? DoneTasksCount { get; set; }
-        public int? ApprovedTasksCount { get; set; }
-        public int? TasksWithBugsCount { get; set; }
-        public int? DebuggingTasksCount { get; set; }
-        public int? HighestPriorityTasksCount { get; set; }
-        public DateTime? FirstActivityDateTime { get; set; }
-        public DateTime? LastActivityDateTime { get; set; }
+        [DataMember]
+		public int Id { get; set; }
+        [DataMember]
+		public string Name { get; set; }
+        [DataMember]
+		public string Description { get; set; }
+        [DataMember]
+		public int TeamLeadId { get; set; }
+        [DataMember]
+		public int? ParentTeamId { get; set; }
+        [DataMember]
+		public int? TotalPeopleCount { get; set; }
+        [DataMember]
+		public int? SuperiorsCount { get; set; }
+        [DataMember]
+		public int? SubteamsCount { get; set; }
+        [DataMember]
+		public int? TotalTasksCount { get; set; }
+        [DataMember]
+		public int? NewTasksCount { get; set; }
+        [DataMember]
+		public int? TasksInProgressCount { get; set; }
+        [DataMember]
+		public int? DoneTasksCount { get; set; }
+        [DataMember]
+		public int? ApprovedTasksCount { get; set; }
+        [DataMember]
+		public int? TasksWithBugsCount { get; set; }
+        [DataMember]
+		public int? DebuggingTasksCount { get; set; }
+        [DataMember]
+		public int? HighestPriorityTasksCount { get; set; }
+        [DataMember]
+		public DateTime? FirstActivityDateTime { get; set; }
+        [DataMember]
+		public DateTime? LastActivityDateTime { get; set; }
     }
 }
