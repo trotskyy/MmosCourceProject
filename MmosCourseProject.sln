@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MmosCourseProject.DAL", "MmosCourseProject.DAL\MmosCourseProject.DAL.csproj", "{49B93AA1-FA61-4F46-8EDC-F5863BEAD2B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MmosCourseProject.BLL", "MmosCourseProject.BLL\MmosCourseProject.BLL.csproj", "{8823B86D-96F9-4094-AE35-88C0C63B70D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49B93AA1-FA61-4F46-8EDC-F5863BEAD2B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49B93AA1-FA61-4F46-8EDC-F5863BEAD2B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49B93AA1-FA61-4F46-8EDC-F5863BEAD2B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49B93AA1-FA61-4F46-8EDC-F5863BEAD2B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8823B86D-96F9-4094-AE35-88C0C63B70D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8823B86D-96F9-4094-AE35-88C0C63B70D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8823B86D-96F9-4094-AE35-88C0C63B70D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8823B86D-96F9-4094-AE35-88C0C63B70D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76CDF3DE-711B-486E-BD9B-4416E8DB8308}
+	EndGlobalSection
+EndGlobal

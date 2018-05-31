@@ -1,0 +1,1228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище MyTrelloEdm" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Channels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreatorId" Type="int" Nullable="false" />
+          <Property Name="TeamId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChatMessages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="ChannelId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SentDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SentDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatorId" Type="int" Nullable="false" />
+          <Property Name="CreationDateTime" Type="datetime" Nullable="false" />
+          <Property Name="TeamId" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Priority" Type="int" Nullable="false" />
+          <Property Name="IsUrgent" Type="bit" Nullable="false" />
+          <Property Name="LastChangeDateTime" Type="datetime" />
+          <Property Name="ParentTaskId" Type="int" />
+          <Property Name="ResponsibleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="TeamLeadId" Type="int" Nullable="false" />
+          <Property Name="ParentTeamId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserChannels">
+          <Key>
+            <PropertyRef Name="User_Id" />
+            <PropertyRef Name="Channel_Id" />
+          </Key>
+          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="Channel_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="varchar(max)" Nullable="false" />
+          <Property Name="PasswordSalt" Type="varchar(max)" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="Specialization" Type="nvarchar" MaxLength="50" />
+          <Property Name="Level" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTasks">
+          <Key>
+            <PropertyRef Name="User_Id" />
+            <PropertyRef Name="Task_Id" />
+          </Key>
+          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="Task_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTeams">
+          <Key>
+            <PropertyRef Name="User_Id" />
+            <PropertyRef Name="Team_Id" />
+          </Key>
+          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="Team_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "MyTrello.dbo.vTasksInfo" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="vTasksInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="CreatorId" />
+            <PropertyRef Name="CreationDateTime" />
+            <PropertyRef Name="TeamId" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Priority" />
+            <PropertyRef Name="IsUrgent" />
+            <PropertyRef Name="ResponsibleId" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatorId" Type="int" Nullable="false" />
+          <Property Name="CreationDateTime" Type="datetime" Nullable="false" />
+          <Property Name="TeamId" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Priority" Type="int" Nullable="false" />
+          <Property Name="IsUrgent" Type="bit" Nullable="false" />
+          <Property Name="LastChangeDateTime" Type="datetime" />
+          <Property Name="ParentTaskId" Type="int" />
+          <Property Name="ResponsibleId" Type="int" Nullable="false" />
+          <Property Name="SubtasksCount" Type="int" />
+          <Property Name="TotalExecutorsCount" Type="int" />
+          <Property Name="DirectExecutorsCount" Type="int" />
+          <Property Name="WholeTaskTreeLastChangeDateTime" Type="datetime" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "MyTrello.dbo.vTeamsInfo" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="vTeamsInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="TeamLeadId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="TeamLeadId" Type="int" Nullable="false" />
+          <Property Name="ParentTeamId" Type="int" />
+          <Property Name="TotalPeopleCount" Type="int" />
+          <Property Name="SuperiorsCount" Type="int" />
+          <Property Name="SubteamsCount" Type="int" />
+          <Property Name="TotalTasksCount" Type="int" />
+          <Property Name="NewTasksCount" Type="int" />
+          <Property Name="TasksInProgressCount" Type="int" />
+          <Property Name="DoneTasksCount" Type="int" />
+          <Property Name="ApprovedTasksCount" Type="int" />
+          <Property Name="TasksWithBugsCount" Type="int" />
+          <Property Name="DebuggingTasksCount" Type="int" />
+          <Property Name="HighestPriorityTasksCount" Type="int" />
+          <Property Name="FirstActivityDateTime" Type="datetime" />
+          <Property Name="LastActivityDateTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Channels__29572725">
+          <End Role="UserTeams" Type="Self.UserTeams" Multiplicity="1" />
+          <End Role="Channels" Type="Self.Channels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTeams">
+              <PropertyRef Name="User_Id" />
+              <PropertyRef Name="Team_Id" />
+            </Principal>
+            <Dependent Role="Channels">
+              <PropertyRef Name="CreatorId" />
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChatMessa__Autho__2F10007B">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChatMessages" Type="Self.ChatMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessages">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChatMessa__Chann__300424B4">
+          <End Role="Channels" Type="Self.Channels" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChatMessages" Type="Self.ChatMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessages">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__Author__24927208">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__TaskId__25869641">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__1DE57479">
+          <End Role="UserTeams" Type="Self.UserTeams" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTeams">
+              <PropertyRef Name="User_Id" />
+              <PropertyRef Name="Team_Id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="CreatorId" />
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__ParentTas__1BFD2C07">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="0..1" />
+          <End Role="Tasks1" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tasks1">
+              <PropertyRef Name="ParentTaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__Responsib__1CF15040">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="ResponsibleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teams__ParentTea__145C0A3F">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="0..1" />
+          <End Role="Teams1" Type="Self.Teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teams1">
+              <PropertyRef Name="ParentTeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teams__TeamLeadI__1367E606">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Teams" Type="Self.Teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teams">
+              <PropertyRef Name="TeamLeadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserChann__Chann__2C3393D0">
+          <End Role="Channels" Type="Self.Channels" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserChannels" Type="Self.UserChannels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserChannels">
+              <PropertyRef Name="Channel_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserChann__User___2B3F6F97">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserChannels" Type="Self.UserChannels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserChannels">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserTasks__Task___21B6055D">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserTasks" Type="Self.UserTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTasks">
+              <PropertyRef Name="Task_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserTasks__User___20C1E124">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserTasks" Type="Self.UserTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTasks">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserTeams__Team___182C9B23">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserTeams" Type="Self.UserTeams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTeams">
+              <PropertyRef Name="Team_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserTeams__User___173876EA">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserTeams" Type="Self.UserTeams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTeams">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteTaskGraph" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="taskId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllSubtaskIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parentTaskId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Id" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetAllSubtasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parentTaskId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Id" Type="int" />
+                <Property Name="CreationDateTime" Type="datetime" />
+                <Property Name="CreatorId" Type="int" />
+                <Property Name="Description" Type="nvarchar(max)" />
+                <Property Name="IsUrgent" Type="bit" />
+                <Property Name="LastChangeDateTime" Type="datetime" />
+                <Property Name="Name" Type="nvarchar" MaxLength="50" />
+                <Property Name="Priority" Type="int" />
+                <Property Name="ResponsibleId" Type="int" />
+                <Property Name="State" Type="int" />
+                <Property Name="TeamId" Type="int" />
+                <Property Name="ParentTaskId" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetAllSubteams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parentTeamId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Id" Type="int" />
+                <Property Name="Name" Type="nvarchar" MaxLength="30" />
+                <Property Name="Description" Type="nvarchar(max)" />
+                <Property Name="TeamLeadId" Type="int" />
+                <Property Name="ParentTeamId" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetAllSubteamsIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parentTeamId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Id" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GetTotalExecutorsAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="taskId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTotalMembersAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="teamId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateTaskGraphState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parentTaskId" Type="int" Mode="In" />
+          <Parameter Name="newState" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище MyTrelloEdmContainer">
+          <EntitySet Name="Channels" EntityType="Self.Channels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatMessages" EntityType="Self.ChatMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserChannels" EntityType="Self.UserChannels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTasks" EntityType="Self.UserTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTeams" EntityType="Self.UserTeams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vTasksInfo" EntityType="Self.vTasksInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vTasksInfo].[Id] AS [Id], 
+    [vTasksInfo].[Name] AS [Name], 
+    [vTasksInfo].[Description] AS [Description], 
+    [vTasksInfo].[CreatorId] AS [CreatorId], 
+    [vTasksInfo].[CreationDateTime] AS [CreationDateTime], 
+    [vTasksInfo].[TeamId] AS [TeamId], 
+    [vTasksInfo].[State] AS [State], 
+    [vTasksInfo].[Priority] AS [Priority], 
+    [vTasksInfo].[IsUrgent] AS [IsUrgent], 
+    [vTasksInfo].[LastChangeDateTime] AS [LastChangeDateTime], 
+    [vTasksInfo].[ParentTaskId] AS [ParentTaskId], 
+    [vTasksInfo].[ResponsibleId] AS [ResponsibleId], 
+    [vTasksInfo].[SubtasksCount] AS [SubtasksCount], 
+    [vTasksInfo].[TotalExecutorsCount] AS [TotalExecutorsCount], 
+    [vTasksInfo].[DirectExecutorsCount] AS [DirectExecutorsCount], 
+    [vTasksInfo].[WholeTaskTreeLastChangeDateTime] AS [WholeTaskTreeLastChangeDateTime]
+    FROM [dbo].[vTasksInfo] AS [vTasksInfo]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vTeamsInfo" EntityType="Self.vTeamsInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vTeamsInfo].[Id] AS [Id], 
+    [vTeamsInfo].[Name] AS [Name], 
+    [vTeamsInfo].[Description] AS [Description], 
+    [vTeamsInfo].[TeamLeadId] AS [TeamLeadId], 
+    [vTeamsInfo].[ParentTeamId] AS [ParentTeamId], 
+    [vTeamsInfo].[TotalPeopleCount] AS [TotalPeopleCount], 
+    [vTeamsInfo].[SuperiorsCount] AS [SuperiorsCount], 
+    [vTeamsInfo].[SubteamsCount] AS [SubteamsCount], 
+    [vTeamsInfo].[TotalTasksCount] AS [TotalTasksCount], 
+    [vTeamsInfo].[NewTasksCount] AS [NewTasksCount], 
+    [vTeamsInfo].[TasksInProgressCount] AS [TasksInProgressCount], 
+    [vTeamsInfo].[DoneTasksCount] AS [DoneTasksCount], 
+    [vTeamsInfo].[ApprovedTasksCount] AS [ApprovedTasksCount], 
+    [vTeamsInfo].[TasksWithBugsCount] AS [TasksWithBugsCount], 
+    [vTeamsInfo].[DebuggingTasksCount] AS [DebuggingTasksCount], 
+    [vTeamsInfo].[HighestPriorityTasksCount] AS [HighestPriorityTasksCount], 
+    [vTeamsInfo].[FirstActivityDateTime] AS [FirstActivityDateTime], 
+    [vTeamsInfo].[LastActivityDateTime] AS [LastActivityDateTime]
+    FROM [dbo].[vTeamsInfo] AS [vTeamsInfo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Channels__29572725" Association="Self.FK__Channels__29572725">
+            <End Role="UserTeams" EntitySet="UserTeams" />
+            <End Role="Channels" EntitySet="Channels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChatMessa__Autho__2F10007B" Association="Self.FK__ChatMessa__Autho__2F10007B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ChatMessages" EntitySet="ChatMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChatMessa__Chann__300424B4" Association="Self.FK__ChatMessa__Chann__300424B4">
+            <End Role="Channels" EntitySet="Channels" />
+            <End Role="ChatMessages" EntitySet="ChatMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__Author__24927208" Association="Self.FK__Comments__Author__24927208">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__TaskId__25869641" Association="Self.FK__Comments__TaskId__25869641">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__1DE57479" Association="Self.FK__Tasks__1DE57479">
+            <End Role="UserTeams" EntitySet="UserTeams" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__ParentTas__1BFD2C07" Association="Self.FK__Tasks__ParentTas__1BFD2C07">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Tasks1" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__Responsib__1CF15040" Association="Self.FK__Tasks__Responsib__1CF15040">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teams__ParentTea__145C0A3F" Association="Self.FK__Teams__ParentTea__145C0A3F">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Teams1" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teams__TeamLeadI__1367E606" Association="Self.FK__Teams__TeamLeadI__1367E606">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Teams" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserChann__Chann__2C3393D0" Association="Self.FK__UserChann__Chann__2C3393D0">
+            <End Role="Channels" EntitySet="Channels" />
+            <End Role="UserChannels" EntitySet="UserChannels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserChann__User___2B3F6F97" Association="Self.FK__UserChann__User___2B3F6F97">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserChannels" EntitySet="UserChannels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserTasks__Task___21B6055D" Association="Self.FK__UserTasks__Task___21B6055D">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="UserTasks" EntitySet="UserTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserTasks__User___20C1E124" Association="Self.FK__UserTasks__User___20C1E124">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserTasks" EntitySet="UserTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserTeams__Team___182C9B23" Association="Self.FK__UserTeams__Team___182C9B23">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="UserTeams" EntitySet="UserTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserTeams__User___173876EA" Association="Self.FK__UserTeams__User___173876EA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserTeams" EntitySet="UserTeams" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyTrelloEdm" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MyTrelloContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Channels" EntityType="MyTrelloEdm.Channel" />
+          <EntitySet Name="ChatMessages" EntityType="MyTrelloEdm.ChatMessage" />
+          <EntitySet Name="Comments" EntityType="MyTrelloEdm.Comment" />
+          <EntitySet Name="Tasks" EntityType="MyTrelloEdm.Task" />
+          <EntitySet Name="Teams" EntityType="MyTrelloEdm.Team" />
+          <EntitySet Name="Users" EntityType="MyTrelloEdm.User" />
+          <EntitySet Name="UserTeams" EntityType="MyTrelloEdm.UserTeam" />
+          <EntitySet Name="TaskInfoViews" EntityType="MyTrelloEdm.TaskInfoView" />
+          <EntitySet Name="TeamInfoViews" EntityType="MyTrelloEdm.TeamInfoView" />
+          <AssociationSet Name="FK__Channels__29572725" Association="MyTrelloEdm.FK__Channels__29572725">
+            <End Role="UserTeam" EntitySet="UserTeams" />
+            <End Role="Channel" EntitySet="Channels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChatMessa__Chann__300424B4" Association="MyTrelloEdm.FK__ChatMessa__Chann__300424B4">
+            <End Role="Channel" EntitySet="Channels" />
+            <End Role="ChatMessage" EntitySet="ChatMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChatMessa__Autho__2F10007B" Association="MyTrelloEdm.FK__ChatMessa__Autho__2F10007B">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ChatMessage" EntitySet="ChatMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__Author__24927208" Association="MyTrelloEdm.FK__Comments__Author__24927208">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__TaskId__25869641" Association="MyTrelloEdm.FK__Comments__TaskId__25869641">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__1DE57479" Association="MyTrelloEdm.FK__Tasks__1DE57479">
+            <End Role="UserTeam" EntitySet="UserTeams" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__ParentTas__1BFD2C07" Association="MyTrelloEdm.FK__Tasks__ParentTas__1BFD2C07">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Task1" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__Responsib__1CF15040" Association="MyTrelloEdm.FK__Tasks__Responsib__1CF15040">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teams__ParentTea__145C0A3F" Association="MyTrelloEdm.FK__Teams__ParentTea__145C0A3F">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Team1" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teams__TeamLeadI__1367E606" Association="MyTrelloEdm.FK__Teams__TeamLeadI__1367E606">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserTeams__Team___182C9B23" Association="MyTrelloEdm.FK__UserTeams__Team___182C9B23">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="UserTeam" EntitySet="UserTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserTeams__User___173876EA" Association="MyTrelloEdm.FK__UserTeams__User___173876EA">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserTeam" EntitySet="UserTeams" />
+          </AssociationSet>
+          <AssociationSet Name="UserChannels" Association="MyTrelloEdm.UserChannels">
+            <End Role="Channel" EntitySet="Channels" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserTasks" Association="MyTrelloEdm.UserTasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="GetAllSubtaskIds" IsComposable="true" ReturnType="Collection(Int32)">
+            <Parameter Name="parentTaskId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllSubtasks" IsComposable="true" ReturnType="Collection(MyTrelloEdm.GetAllSubtasks_Result)">
+            <Parameter Name="parentTaskId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllSubteams" IsComposable="true" ReturnType="Collection(MyTrelloEdm.GetAllSubteams_Result)">
+            <Parameter Name="parentTeamId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllSubteamsIds" IsComposable="true" ReturnType="Collection(Int32)">
+            <Parameter Name="parentTeamId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EnumType Name="UserPosition">
+          <Member Name="Developer" Value="1" />
+          <Member Name="Designer" Value="2" />
+          <Member Name="ProjectManager" Value="3" />
+          <Member Name="DatabaseAdministrator" Value="4" />
+          <Member Name="DevOps" Value="5" />
+        </EnumType>
+        <EnumType Name="UserLevel">
+          <Member Name="Junior" Value="1" />
+          <Member Name="Middle" Value="2" />
+          <Member Name="Senior" Value="3" />
+        </EnumType>
+        <EnumType Name="TaskState">
+          <Member Name="Created" Value="1" />
+          <Member Name="InProgress" Value="2" />
+          <Member Name="Done" Value="3" />
+          <Member Name="Approved" Value="4" />
+          <Member Name="Bug" Value="5" />
+          <Member Name="Debugging" Value="6" />
+        </EnumType>
+        <EnumType Name="TaskPriority">
+          <Member Name="Highest" Value="1" />
+          <Member Name="High" Value="2" />
+          <Member Name="Medium" Value="3" />
+          <Member Name="Low" Value="4" />
+          <Member Name="Lowest" Value="5" />
+        </EnumType>
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="TeamId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CreatorUserTeam" Relationship="MyTrelloEdm.FK__Channels__29572725" FromRole="Channel" ToRole="UserTeam" />
+          <NavigationProperty Name="ChatMessages" Relationship="MyTrelloEdm.FK__ChatMessa__Chann__300424B4" FromRole="Channel" ToRole="ChatMessage" />
+          <NavigationProperty Name="Users" Relationship="MyTrelloEdm.UserChannels" FromRole="Channel" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <Property Name="ChannelId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SentDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Channel" Relationship="MyTrelloEdm.FK__ChatMessa__Chann__300424B4" FromRole="ChatMessage" ToRole="Channel" />
+          <NavigationProperty Name="Author" Relationship="MyTrelloEdm.FK__ChatMessa__Autho__2F10007B" FromRole="ChatMessage" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SentDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Author" Relationship="MyTrelloEdm.FK__Comments__Author__24927208" FromRole="Comment" ToRole="User" />
+          <NavigationProperty Name="Task" Relationship="MyTrelloEdm.FK__Comments__TaskId__25869641" FromRole="Comment" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="CreationDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TeamId" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="MyTrelloEdm.TaskState" Nullable="false" />
+          <Property Name="Priority" Type="MyTrelloEdm.TaskPriority" Nullable="false" />
+          <Property Name="IsUrgent" Type="Boolean" Nullable="false" />
+          <Property Name="LastChangeDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ParentTaskId" Type="Int32" />
+          <Property Name="ResponsibleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="MyTrelloEdm.FK__Comments__TaskId__25869641" FromRole="Task" ToRole="Comment" />
+          <NavigationProperty Name="CreatorUserTeam" Relationship="MyTrelloEdm.FK__Tasks__1DE57479" FromRole="Task" ToRole="UserTeam" />
+          <NavigationProperty Name="FirstLevelSubtasks" Relationship="MyTrelloEdm.FK__Tasks__ParentTas__1BFD2C07" FromRole="Task" ToRole="Task1" />
+          <NavigationProperty Name="ParentTask" Relationship="MyTrelloEdm.FK__Tasks__ParentTas__1BFD2C07" FromRole="Task1" ToRole="Task" />
+          <NavigationProperty Name="ResponsibleUser" Relationship="MyTrelloEdm.FK__Tasks__Responsib__1CF15040" FromRole="Task" ToRole="User" />
+          <NavigationProperty Name="Executors" Relationship="MyTrelloEdm.UserTasks" FromRole="Task" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TeamLeadId" Type="Int32" Nullable="false" />
+          <Property Name="ParentTeamId" Type="Int32" />
+          <NavigationProperty Name="FirstLevelSubteams" Relationship="MyTrelloEdm.FK__Teams__ParentTea__145C0A3F" FromRole="Team" ToRole="Team1" />
+          <NavigationProperty Name="ParentTeam" Relationship="MyTrelloEdm.FK__Teams__ParentTea__145C0A3F" FromRole="Team1" ToRole="Team" />
+          <NavigationProperty Name="TeamLead" Relationship="MyTrelloEdm.FK__Teams__TeamLeadI__1367E606" FromRole="Team" ToRole="User" />
+          <NavigationProperty Name="UserTeams" Relationship="MyTrelloEdm.FK__UserTeams__Team___182C9B23" FromRole="Team" ToRole="UserTeam" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="MyTrelloEdm.UserPosition" Nullable="false" />
+          <Property Name="Specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="MyTrelloEdm.UserLevel" Nullable="false" />
+          <NavigationProperty Name="ChatMessages" Relationship="MyTrelloEdm.FK__ChatMessa__Autho__2F10007B" FromRole="User" ToRole="ChatMessage" />
+          <NavigationProperty Name="Comments" Relationship="MyTrelloEdm.FK__Comments__Author__24927208" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="TasksRespondFor" Relationship="MyTrelloEdm.FK__Tasks__Responsib__1CF15040" FromRole="User" ToRole="Task" />
+          <NavigationProperty Name="TeamsUnderLead" Relationship="MyTrelloEdm.FK__Teams__TeamLeadI__1367E606" FromRole="User" ToRole="Team" />
+          <NavigationProperty Name="UserTeams" Relationship="MyTrelloEdm.FK__UserTeams__User___173876EA" FromRole="User" ToRole="UserTeam" />
+          <NavigationProperty Name="Channels" Relationship="MyTrelloEdm.UserChannels" FromRole="User" ToRole="Channel" />
+          <NavigationProperty Name="TaskList" Relationship="MyTrelloEdm.UserTasks" FromRole="User" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="UserTeam">
+          <Key>
+            <PropertyRef Name="User_Id" />
+            <PropertyRef Name="Team_Id" />
+          </Key>
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+          <Property Name="Team_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Channels" Relationship="MyTrelloEdm.FK__Channels__29572725" FromRole="UserTeam" ToRole="Channel" />
+          <NavigationProperty Name="Tasks" Relationship="MyTrelloEdm.FK__Tasks__1DE57479" FromRole="UserTeam" ToRole="Task" />
+          <NavigationProperty Name="Team" Relationship="MyTrelloEdm.FK__UserTeams__Team___182C9B23" FromRole="UserTeam" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="MyTrelloEdm.FK__UserTeams__User___173876EA" FromRole="UserTeam" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TaskInfoView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="CreatorId" />
+            <PropertyRef Name="CreationDateTime" />
+            <PropertyRef Name="TeamId" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Priority" />
+            <PropertyRef Name="IsUrgent" />
+            <PropertyRef Name="ResponsibleId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="CreationDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TeamId" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Priority" Type="Int32" Nullable="false" />
+          <Property Name="IsUrgent" Type="Boolean" Nullable="false" />
+          <Property Name="LastChangeDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ParentTaskId" Type="Int32" />
+          <Property Name="ResponsibleId" Type="Int32" Nullable="false" />
+          <Property Name="SubtasksCount" Type="Int32" />
+          <Property Name="TotalExecutorsCount" Type="Int32" />
+          <Property Name="DirectExecutorsCount" Type="Int32" />
+          <Property Name="WholeTaskTreeLastChangeDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TeamInfoView">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="TeamLeadId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TeamLeadId" Type="Int32" Nullable="false" />
+          <Property Name="ParentTeamId" Type="Int32" />
+          <Property Name="TotalPeopleCount" Type="Int32" />
+          <Property Name="SuperiorsCount" Type="Int32" />
+          <Property Name="SubteamsCount" Type="Int32" />
+          <Property Name="TotalTasksCount" Type="Int32" />
+          <Property Name="NewTasksCount" Type="Int32" />
+          <Property Name="TasksInProgressCount" Type="Int32" />
+          <Property Name="DoneTasksCount" Type="Int32" />
+          <Property Name="ApprovedTasksCount" Type="Int32" />
+          <Property Name="TasksWithBugsCount" Type="Int32" />
+          <Property Name="DebuggingTasksCount" Type="Int32" />
+          <Property Name="HighestPriorityTasksCount" Type="Int32" />
+          <Property Name="FirstActivityDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastActivityDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK__Channels__29572725">
+          <End Type="MyTrelloEdm.UserTeam" Role="UserTeam" Multiplicity="1" />
+          <End Type="MyTrelloEdm.Channel" Role="Channel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTeam">
+              <PropertyRef Name="User_Id" />
+              <PropertyRef Name="Team_Id" />
+            </Principal>
+            <Dependent Role="Channel">
+              <PropertyRef Name="CreatorId" />
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChatMessa__Chann__300424B4">
+          <End Type="MyTrelloEdm.Channel" Role="Channel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MyTrelloEdm.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessage">
+              <PropertyRef Name="ChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChatMessa__Autho__2F10007B">
+          <End Type="MyTrelloEdm.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MyTrelloEdm.ChatMessage" Role="ChatMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessage">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__Author__24927208">
+          <End Type="MyTrelloEdm.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MyTrelloEdm.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__TaskId__25869641">
+          <End Type="MyTrelloEdm.Task" Role="Task" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MyTrelloEdm.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__1DE57479">
+          <End Type="MyTrelloEdm.UserTeam" Role="UserTeam" Multiplicity="1" />
+          <End Type="MyTrelloEdm.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTeam">
+              <PropertyRef Name="User_Id" />
+              <PropertyRef Name="Team_Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="CreatorId" />
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__ParentTas__1BFD2C07">
+          <End Type="MyTrelloEdm.Task" Role="Task" Multiplicity="0..1" />
+          <End Type="MyTrelloEdm.Task" Role="Task1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task1">
+              <PropertyRef Name="ParentTaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__Responsib__1CF15040">
+          <End Type="MyTrelloEdm.User" Role="User" Multiplicity="1" />
+          <End Type="MyTrelloEdm.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ResponsibleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teams__ParentTea__145C0A3F">
+          <End Type="MyTrelloEdm.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="MyTrelloEdm.Team" Role="Team1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team1">
+              <PropertyRef Name="ParentTeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teams__TeamLeadI__1367E606">
+          <End Type="MyTrelloEdm.User" Role="User" Multiplicity="1" />
+          <End Type="MyTrelloEdm.Team" Role="Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="TeamLeadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserTeams__Team___182C9B23">
+          <End Type="MyTrelloEdm.Team" Role="Team" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MyTrelloEdm.UserTeam" Role="UserTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTeam">
+              <PropertyRef Name="Team_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserTeams__User___173876EA">
+          <End Type="MyTrelloEdm.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MyTrelloEdm.UserTeam" Role="UserTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTeam">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserChannels">
+          <End Type="MyTrelloEdm.Channel" Role="Channel" Multiplicity="*" />
+          <End Type="MyTrelloEdm.User" Role="User" Multiplicity="*" />
+        </Association>
+        <Association Name="UserTasks">
+          <End Type="MyTrelloEdm.Task" Role="Task" Multiplicity="*" />
+          <End Type="MyTrelloEdm.User" Role="User" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="GetAllSubtasks_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="DateTime" Name="CreationDateTime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CreatorId" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="Boolean" Name="IsUrgent" Nullable="true" />
+          <Property Type="DateTime" Name="LastChangeDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Priority" Nullable="true" />
+          <Property Type="Int32" Name="ResponsibleId" Nullable="true" />
+          <Property Type="Int32" Name="State" Nullable="true" />
+          <Property Type="Int32" Name="TeamId" Nullable="true" />
+          <Property Type="Int32" Name="ParentTaskId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAllSubteams_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="Int32" Name="TeamLeadId" Nullable="true" />
+          <Property Type="Int32" Name="ParentTeamId" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище MyTrelloEdmContainer" CdmEntityContainer="MyTrelloContext">
+          <EntitySetMapping Name="Channels">
+            <EntityTypeMapping TypeName="MyTrelloEdm.Channel">
+              <MappingFragment StoreEntitySet="Channels">
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatMessages">
+            <EntityTypeMapping TypeName="MyTrelloEdm.ChatMessage">
+              <MappingFragment StoreEntitySet="ChatMessages">
+                <ScalarProperty Name="SentDateTime" ColumnName="SentDateTime" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="MyTrelloEdm.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="SentDateTime" ColumnName="SentDateTime" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="MyTrelloEdm.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="ResponsibleId" ColumnName="ResponsibleId" />
+                <ScalarProperty Name="ParentTaskId" ColumnName="ParentTaskId" />
+                <ScalarProperty Name="LastChangeDateTime" ColumnName="LastChangeDateTime" />
+                <ScalarProperty Name="IsUrgent" ColumnName="IsUrgent" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="MyTrelloEdm.Team">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="ParentTeamId" ColumnName="ParentTeamId" />
+                <ScalarProperty Name="TeamLeadId" ColumnName="TeamLeadId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MyTrelloEdm.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTeams">
+            <EntityTypeMapping TypeName="MyTrelloEdm.UserTeam">
+              <MappingFragment StoreEntitySet="UserTeams">
+                <ScalarProperty Name="Team_Id" ColumnName="Team_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskInfoViews">
+            <EntityTypeMapping TypeName="MyTrelloEdm.TaskInfoView">
+              <MappingFragment StoreEntitySet="vTasksInfo">
+                <ScalarProperty Name="WholeTaskTreeLastChangeDateTime" ColumnName="WholeTaskTreeLastChangeDateTime" />
+                <ScalarProperty Name="DirectExecutorsCount" ColumnName="DirectExecutorsCount" />
+                <ScalarProperty Name="TotalExecutorsCount" ColumnName="TotalExecutorsCount" />
+                <ScalarProperty Name="SubtasksCount" ColumnName="SubtasksCount" />
+                <ScalarProperty Name="ResponsibleId" ColumnName="ResponsibleId" />
+                <ScalarProperty Name="ParentTaskId" ColumnName="ParentTaskId" />
+                <ScalarProperty Name="LastChangeDateTime" ColumnName="LastChangeDateTime" />
+                <ScalarProperty Name="IsUrgent" ColumnName="IsUrgent" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamInfoViews">
+            <EntityTypeMapping TypeName="MyTrelloEdm.TeamInfoView">
+              <MappingFragment StoreEntitySet="vTeamsInfo">
+                <ScalarProperty Name="LastActivityDateTime" ColumnName="LastActivityDateTime" />
+                <ScalarProperty Name="FirstActivityDateTime" ColumnName="FirstActivityDateTime" />
+                <ScalarProperty Name="HighestPriorityTasksCount" ColumnName="HighestPriorityTasksCount" />
+                <ScalarProperty Name="DebuggingTasksCount" ColumnName="DebuggingTasksCount" />
+                <ScalarProperty Name="TasksWithBugsCount" ColumnName="TasksWithBugsCount" />
+                <ScalarProperty Name="ApprovedTasksCount" ColumnName="ApprovedTasksCount" />
+                <ScalarProperty Name="DoneTasksCount" ColumnName="DoneTasksCount" />
+                <ScalarProperty Name="TasksInProgressCount" ColumnName="TasksInProgressCount" />
+                <ScalarProperty Name="NewTasksCount" ColumnName="NewTasksCount" />
+                <ScalarProperty Name="TotalTasksCount" ColumnName="TotalTasksCount" />
+                <ScalarProperty Name="SubteamsCount" ColumnName="SubteamsCount" />
+                <ScalarProperty Name="SuperiorsCount" ColumnName="SuperiorsCount" />
+                <ScalarProperty Name="TotalPeopleCount" ColumnName="TotalPeopleCount" />
+                <ScalarProperty Name="ParentTeamId" ColumnName="ParentTeamId" />
+                <ScalarProperty Name="TeamLeadId" ColumnName="TeamLeadId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserChannels" TypeName="MyTrelloEdm.UserChannels" StoreEntitySet="UserChannels">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="User_Id" />
+            </EndProperty>
+            <EndProperty Name="Channel">
+              <ScalarProperty Name="Id" ColumnName="Channel_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserTasks" TypeName="MyTrelloEdm.UserTasks" StoreEntitySet="UserTasks">
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="User_Id" />
+            </EndProperty>
+            <EndProperty Name="Task">
+              <ScalarProperty Name="Id" ColumnName="Task_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSubtaskIds" FunctionName="Хранилище MyTrelloEdm.GetAllSubtaskIds" />
+          <FunctionImportMapping FunctionImportName="GetAllSubtasks" FunctionName="Хранилище MyTrelloEdm.GetAllSubtasks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyTrelloEdm.GetAllSubtasks_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsUrgent" ColumnName="IsUrgent" />
+                <ScalarProperty Name="LastChangeDateTime" ColumnName="LastChangeDateTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="ResponsibleId" ColumnName="ResponsibleId" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="ParentTaskId" ColumnName="ParentTaskId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSubteams" FunctionName="Хранилище MyTrelloEdm.GetAllSubteams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyTrelloEdm.GetAllSubteams_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TeamLeadId" ColumnName="TeamLeadId" />
+                <ScalarProperty Name="ParentTeamId" ColumnName="ParentTeamId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSubteamsIds" FunctionName="Хранилище MyTrelloEdm.GetAllSubteamsIds" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
