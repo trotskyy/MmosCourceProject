@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MmosCourseProject.DAL", "Mm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MmosCourseProject.BLL", "MmosCourseProject.BLL\MmosCourseProject.BLL.csproj", "{8823B86D-96F9-4094-AE35-88C0C63B70D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MmosCourseProject.WebApi", "MmosCourseProject.WebApi\MmosCourseProject.WebApi.csproj", "{62FD408A-9085-4356-AD2F-6ED2CB776A8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8823B86D-96F9-4094-AE35-88C0C63B70D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8823B86D-96F9-4094-AE35-88C0C63B70D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8823B86D-96F9-4094-AE35-88C0C63B70D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62FD408A-9085-4356-AD2F-6ED2CB776A8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62FD408A-9085-4356-AD2F-6ED2CB776A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62FD408A-9085-4356-AD2F-6ED2CB776A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62FD408A-9085-4356-AD2F-6ED2CB776A8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
