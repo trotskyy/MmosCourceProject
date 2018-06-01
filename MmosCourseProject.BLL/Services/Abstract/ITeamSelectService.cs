@@ -1,10 +1,13 @@
 ﻿using MmosCourseProject.BLL.DataStructures;
-using MmosCourseProject.BLL.Dto.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using General = MmosCourseProject.BLL.Dto.General;
+using Selectional = MmosCourseProject.BLL.Dto.Parameters.Selectional;
+using Creational = MmosCourseProject.BLL.Dto.Parameters.Creational;
+using Updational = MmosCourseProject.BLL.Dto.Parameters.Updational;
 
 namespace MmosCourseProject.BLL.Services.Abstract
 {
@@ -19,21 +22,21 @@ namespace MmosCourseProject.BLL.Services.Abstract
         /// <param name="name"></param>
         /// <param name="strictlyMatching">false = LIKE '%name%'</param>
         /// <returns></returns>
-        List<TeamDto> RootTeamsByName(string name, bool strictlyMatching);
+        List<General.TeamDto> RootTeamsByName(string name, bool strictlyMatching);
 
         /// <summary>
         /// Получение списка команд верхнего уровня для пользователя
         /// </summary>
         /// <param name="member">Id required</param>
         /// <returns></returns>
-        List<TeamDto> TeamsByMember(UserDto member);
+        List<General.TeamDto> TeamsByMember(Selectional.UserDto member);
 
         /// <summary>
         /// All subteams and their subteans and ...
         /// </summary>
         /// <param name="rootTeam"></param>
         /// <returns>TREE!</returns>
-        Tree<TeamDto> SubteamsTree(TeamDto rootTeam);
+        Tree<General.TeamDto> SubteamsTree(Selectional.TeamDto rootTeam);
 
         /// <summary>
         /// Получение учасников команды включая (или нет) участников подкоманд
@@ -41,6 +44,6 @@ namespace MmosCourseProject.BLL.Services.Abstract
         /// <param name="team"></param>
         /// <param name="includingSubteams">включая участников подкоманд</param>
         /// <returns></returns>
-        List<UserDto> TeamParticipants(TeamDto team, bool includingSubteams);
+        List<General.UserDto> TeamParticipants(Selectional.TeamDto team, bool includingSubteams);
     }
 }

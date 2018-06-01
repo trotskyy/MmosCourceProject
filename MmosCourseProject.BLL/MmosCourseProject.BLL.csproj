@@ -34,6 +34,7 @@
       <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -59,6 +60,24 @@
     <Compile Include="Dto\General\TeamInfoDto.cs" />
     <Compile Include="Dto\General\UserDto.cs" />
     <Compile Include="Dto\General\UserTeamDto.cs" />
+    <Compile Include="Dto\Parameters\Creational\ChannelDto.cs" />
+    <Compile Include="Dto\Parameters\Creational\ChatMessageDto.cs" />
+    <Compile Include="Dto\Parameters\Creational\CommentDto.cs" />
+    <Compile Include="Dto\Parameters\Creational\TaskDto.cs" />
+    <Compile Include="Dto\Parameters\Creational\TeamDto.cs" />
+    <Compile Include="Dto\Parameters\Creational\UserDto.cs" />
+    <Compile Include="Dto\Parameters\Selectional\ChannelDto.cs" />
+    <Compile Include="Dto\Parameters\Selectional\ChatMessageDto.cs" />
+    <Compile Include="Dto\Parameters\Selectional\CommentDto.cs" />
+    <Compile Include="Dto\Parameters\Selectional\TaskDto.cs" />
+    <Compile Include="Dto\Parameters\Selectional\TeamDto.cs" />
+    <Compile Include="Dto\Parameters\Selectional\UserDto.cs" />
+    <Compile Include="Dto\Parameters\Updational\ChannelDto.cs" />
+    <Compile Include="Dto\Parameters\Updational\ChatMessageDto.cs" />
+    <Compile Include="Dto\Parameters\Updational\CommentDto.cs" />
+    <Compile Include="Dto\Parameters\Updational\TaskDto.cs" />
+    <Compile Include="Dto\Parameters\Updational\TeamDto.cs" />
+    <Compile Include="Dto\Parameters\Updational\UserDto.cs" />
     <Compile Include="Exceptions\DomainModelException.cs" />
     <Compile Include="Exceptions\DtoValidationFailedException.cs" />
     <Compile Include="Exceptions\IdNotSpecifiedException.cs" />
@@ -81,7 +100,12 @@
     <Compile Include="Services\TeamService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\AutomapperInitializer.cs" />
-    <Compile Include="Utils\MappingExtensions.cs" />
+    <Compile Include="Utils\MappingExtensionsForViews.cs" />
+    <Compile Include="Utils\MappingExtensionsForEnums.cs" />
+    <Compile Include="Utils\MappingExtensionsForGeneralDtos.cs" />
+    <Compile Include="Utils\MappingExtensionsForUpdationalDtos .cs" />
+    <Compile Include="Utils\MappingExtensionsForSelectionalDtos.cs" />
+    <Compile Include="Utils\MappingExtensionsForCreationalDtos.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -94,6 +118,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dto\General\_README.txt" />
+    <Content Include="Dto\Parameters\Creational\_README.txt" />
+    <Content Include="Dto\Parameters\Selectional\_README.txt" />
+    <Content Include="Dto\Parameters\Updational\_README.txt" />
+    <Content Include="Dto\ReturnedValues\_README.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

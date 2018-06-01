@@ -5,26 +5,25 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace MmosCourseProject.BLL.Dto.General
+namespace MmosCourseProject.BLL.Dto.Parameters.Creational
 {
     [DataContract]
     public class ChannelDto
     {
         [DataMember]
+        [Range(0,0, ErrorMessage = "Id must be NOT specified in case of creation")]
         public int Id { get; set; }
-        [DataMember]
-        public string Name { get; set; }
-        [DataMember]
-        public int CreatorId { get; set; }
-        [DataMember]
-        public int TeamId { get; set; }
 
         [DataMember]
-        public UserTeamDto CreatorUserTeam { get; set; }
+        [Required]
+        public string Name { get; set; }
+
         [DataMember]
-        public List<ChatMessageDto> ChatMessages { get; set; }
+        public int CreatorId { get; set; }
+
         [DataMember]
-        public List<UserDto> Users { get; set; }
+        public int TeamId { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MmosCourseProject.BLL.Exceptions;
-using MmosCourseProject.BLL.Dto.General;
+using MmosCourseProject.BLL.Dto;
 using MmosCourseProject.BLL.Services.Abstract;
 using MmosCourseProject.DAL;
 using MmosCourseProject.DAL.Abstract;
@@ -10,32 +10,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using General = MmosCourseProject.BLL.Dto.General;
+using Selectional = MmosCourseProject.BLL.Dto.Parameters.Selectional;
+using MmosCourseProject.BLL.Utils;
+
 namespace MmosCourseProject.BLL.Services
 {
-    public class ChannelSelectService : GenericService<ChannelDto, Channel>, IChannelSelectService
+    public class ChannelSelectService : GenericService<General.ChannelDto, Channel>, IChannelSelectService
     {
-        protected ChannelSelectService(IUnitOfWorkFactory unitOfWorkFactory) : base(unitOfWorkFactory)
+        public ChannelSelectService(IUnitOfWorkFactory unitOfWorkFactory) : base(unitOfWorkFactory)
         {
         }
 
-        public List<UserDto> ChannelMembers(ChannelDto channel)
+        public List<General.UserDto> ChannelMembers(Selectional.ChannelDto channel)
         {
-            if (channel == null)
-                throw new ArgumentNullException();
-            if (channel.Id == 0)
-                throw new IdNotSpecifiedException(channel);
+            ValidateDto(channel);
 
-            return ExecuteSelect<UserDto, User>(uow => uow.ChannelRepository.GetMembers(channel.Id));
-        }        
+            return ExecuteSelect<General.UserDto, User>(uow => uow.ChannelRepository.GetMembers(channel.Id));
+        }
 
-        public List<ChannelDto> ChannelsByTeam(TeamDto team)
+        public List<General.ChannelDto> ChannelsByTeam(Selectional.TeamDto team)
         {
-            if (team == null)
-                throw new ArgumentNullException();
-            if (team.Id == 0)
-                throw new IdNotSpecifiedException(team);
+            ValidateDto(team);
 
-            return ExecuteSelect<ChannelDto, Channel>(uow => uow.ChannelRepository.GetChannelsByTeam(team.Id));
+            return ExecuteSelect<General.ChannelDto, Channel>(uow => uow.ChannelRepository.GetChannelsByTeam(team.Id));
         }
     }
 }

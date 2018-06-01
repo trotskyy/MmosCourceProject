@@ -1,9 +1,11 @@
 ﻿using MmosCourseProject.BLL.Dto.Enum;
-using MmosCourseProject.BLL.Dto.General;
 using MmosCourseProject.BLL.Dto;
 using System.Collections.Generic;
 using System;
 using MmosCourseProject.BLL.DataStructures;
+using General = MmosCourseProject.BLL.Dto.General;
+using Selectional = MmosCourseProject.BLL.Dto.Parameters.Selectional;
+using Creational = MmosCourseProject.BLL.Dto.Parameters.Creational;
 
 namespace MmosCourseProject.BLL.Services.Abstract
 {
@@ -12,6 +14,6 @@ namespace MmosCourseProject.BLL.Services.Abstract
     /// </summary>
     public interface ITaskSelectService
     {
-        List<TaskDto> TasksByExecutor(UserDto executor);
+        List<General.TaskDto> TasksByExecutor(Selectional.UserDto executor);
     }
 }

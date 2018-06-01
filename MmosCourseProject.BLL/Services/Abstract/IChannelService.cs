@@ -4,6 +4,10 @@ using MmosCourseProject.BLL.Dto;
 using System.Collections.Generic;
 using System;
 using MmosCourseProject.BLL.DataStructures;
+using General = MmosCourseProject.BLL.Dto.General;
+using Selectional = MmosCourseProject.BLL.Dto.Parameters.Selectional;
+using Creational = MmosCourseProject.BLL.Dto.Parameters.Creational;
+
 
 namespace MmosCourseProject.BLL.Services.Abstract
 {
@@ -11,9 +15,9 @@ namespace MmosCourseProject.BLL.Services.Abstract
     {
         IChannelSelectService Get { get; }
 
-        void CreateChannel(ChannelDto channel);
+        void CreateChannel(Creational.ChannelDto channel);
 
-        void DeleteChannel(ChannelDto channel);
+        void DeleteChannel(Selectional.ChannelDto channel);
         
         /// <summary>
         /// Пригласить пользова-теля в канал

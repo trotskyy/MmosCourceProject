@@ -6,25 +6,23 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MmosCourseProject.BLL.Dto.General
+namespace MmosCourseProject.BLL.Dto.Parameters.Updational
 {
     [DataContract]
     public class ChannelDto
     {
         [DataMember]
+        [Range(1, Int32.MaxValue, ErrorMessage = "Id not specified")]
         public int Id { get; set; }
-        [DataMember]
-        public string Name { get; set; }
-        [DataMember]
-        public int CreatorId { get; set; }
-        [DataMember]
-        public int TeamId { get; set; }
 
         [DataMember]
-        public UserTeamDto CreatorUserTeam { get; set; }
+        [Required]
+        public string Name { get; set; }
+
         [DataMember]
-        public List<ChatMessageDto> ChatMessages { get; set; }
+        public int CreatorId { get; set; }
+
         [DataMember]
-        public List<UserDto> Users { get; set; }
+        public int TeamId { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MmosCourseProject.BLL.Exceptions;
+using System.ComponentModel.DataAnnotations;
 
 namespace MmosCourseProject.BLL.Services.Abstract
 {
@@ -110,6 +111,30 @@ namespace MmosCourseProject.BLL.Services.Abstract
             return GeneralExecuteSelect<TDtoEntity, TDbEntity>(query);
         }
         #endregion
+
+        /// <summary>
+        /// Throws ArgumentNullException / DtoValidationException or inherited exceptions if DTO is not valid
+        /// </summary>
+        /// <param name="dto">Any DTO with DataAnnotations attributes</param>
+        protected void ValidateDto(object dto)
+        {
+            if (dto is null)
+                throw new ArgumentNullException();
+
+            var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(dto, null, null);
+            var validationResults = new List<ValidationResult>();
+            bool isDtoValid = Validator.TryValidateObject(dto, validationContext, validationResults);
+
+            if (isDtoValid)
+                return;
+
+            //foreach (var vr in validationResults)
+            //    foreach (var mn in vr.MemberNames)
+            //        if (mn.Contains("Id"))
+            //            throw new IdNotSpecifiedException(dto);
+
+            throw new DtoValidationFailedException(validationResults);
+        }
 
         /// <summary>
         /// For queries returnin NON table values. NOT MAPPED !!! Don't Saves Changes() !!!
