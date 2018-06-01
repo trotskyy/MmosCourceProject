@@ -78,6 +78,7 @@
     <Compile Include="Dto\Parameters\Updational\TaskDto.cs" />
     <Compile Include="Dto\Parameters\Updational\TeamDto.cs" />
     <Compile Include="Dto\Parameters\Updational\UserDto.cs" />
+    <Compile Include="Exceptions\DomainConstraintViolationException.cs" />
     <Compile Include="Exceptions\DomainModelException.cs" />
     <Compile Include="Exceptions\DtoValidationFailedException.cs" />
     <Compile Include="Exceptions\IdNotSpecifiedException.cs" />
@@ -94,6 +95,14 @@
     <Compile Include="Services\Abstract\IUserService.cs" />
     <Compile Include="Services\ChannelSelectService.cs" />
     <Compile Include="Services\ChannelService.cs" />
+    <Compile Include="Services\DomainConstraintsValidatiotors\ChannelConstraintsValidator.cs" />
+    <Compile Include="Services\DomainConstraintsValidatiotors\ChatMessageConstraintsValidator.cs" />
+    <Compile Include="Services\DomainConstraintsValidatiotors\CommentConstraintsValidator.cs" />
+    <Compile Include="Services\DomainConstraintsValidatiotors\DomainConstraintsValidationFactory.cs" />
+    <Compile Include="Services\DomainConstraintsValidatiotors\IDomainConstraintsValidator.cs" />
+    <Compile Include="Services\DomainConstraintsValidatiotors\TaskConstraintsValidator.cs" />
+    <Compile Include="Services\DomainConstraintsValidatiotors\TeamConstraintsValidator.cs" />
+    <Compile Include="Services\DomainConstraintsValidatiotors\UserConstraintsValidator.cs" />
     <Compile Include="Services\TaskSelectService.cs" />
     <Compile Include="Services\TaskService.cs" />
     <Compile Include="Services\TeamSelectService.cs" />
