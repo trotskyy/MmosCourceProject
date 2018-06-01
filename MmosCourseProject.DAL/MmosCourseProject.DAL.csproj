@@ -60,6 +60,7 @@
     <Compile Include="Abstract\ITeamInfoViewRepository.cs" />
     <Compile Include="Abstract\ITeamRepository.cs" />
     <Compile Include="Abstract\IUnitOfWork.cs" />
+    <Compile Include="Abstract\IUnitOfWorkFactory.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Abstract\IUserTeamRepository.cs" />
     <Compile Include="Abstract\IViewRepository.cs" />
@@ -69,17 +70,19 @@
     <Compile Include="Comment.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="EfProviders\EfUnitOfWorkFactory.cs" />
     <Compile Include="GetAllSubtasks_Result.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllSubteams_Result.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\ChannelRepository.cs" />
+    <Compile Include="MyTrelloContext.cs" />
+    <Compile Include="EfProviders\ChannelRepository.cs" />
     <Compile Include="ChatMessage.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\ChatMessageRepository.cs" />
+    <Compile Include="EfProviders\ChatMessageRepository.cs" />
     <Compile Include="MyTrelloEDM.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -96,21 +99,25 @@
       <DependentUpon>MyTrelloEDM.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EfProviders\CommentRepository.cs" />
+    <Compile Include="EfProviders\TaskInfoViewRepository.cs" />
+    <Compile Include="EfProviders\TeamInfoViewRepository.cs" />
+    <Compile Include="EfProviders\TeamRepository.cs" />
+    <Compile Include="EfProviders\UserTeamRepository.cs" />
     <Compile Include="Task.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\TaskCommentRepository.cs" />
     <Compile Include="TaskInfoView.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
     <Compile Include="TaskPriority.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\TaskRepository.cs" />
+    <Compile Include="EfProviders\TaskRepository.cs" />
     <Compile Include="TaskState.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="EfProviders\UnitOfWork.cs" />
     <Compile Include="Team.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
@@ -126,7 +133,7 @@
     <Compile Include="UserPosition.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="EfProviders\UserRepository.cs" />
     <Compile Include="UserTeam.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>

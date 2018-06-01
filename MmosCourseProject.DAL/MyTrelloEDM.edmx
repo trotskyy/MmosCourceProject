@@ -632,14 +632,21 @@
           <FunctionImport Name="GetAllSubtaskIds" IsComposable="true" ReturnType="Collection(Int32)">
             <Parameter Name="parentTaskId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetAllSubtasks" IsComposable="true" ReturnType="Collection(MyTrelloEdm.GetAllSubtasks_Result)">
+          <FunctionImport Name="GetAllSubtasks" IsComposable="true" EntitySet="Tasks" ReturnType="Collection(MyTrelloEdm.Task)">
             <Parameter Name="parentTaskId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetAllSubteams" IsComposable="true" ReturnType="Collection(MyTrelloEdm.GetAllSubteams_Result)">
+          <FunctionImport Name="GetAllSubteams" IsComposable="true" EntitySet="Teams" ReturnType="Collection(MyTrelloEdm.Team)">
             <Parameter Name="parentTeamId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAllSubteamsIds" IsComposable="true" ReturnType="Collection(Int32)">
             <Parameter Name="parentTeamId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteTaskGraph">
+            <Parameter Name="taskId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateTaskGraphState">
+            <Parameter Name="parentTaskId" Mode="In" Type="Int32" />
+            <Parameter Name="newState" Mode="In" Type="MyTrelloEdm.TaskState" />
           </FunctionImport>
         </EntityContainer>
         <EnumType Name="UserPosition">
@@ -1173,35 +1180,12 @@
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="GetAllSubtaskIds" FunctionName="Хранилище MyTrelloEdm.GetAllSubtaskIds" />
           <FunctionImportMapping FunctionImportName="GetAllSubtasks" FunctionName="Хранилище MyTrelloEdm.GetAllSubtasks">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MyTrelloEdm.GetAllSubtasks_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
-                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="IsUrgent" ColumnName="IsUrgent" />
-                <ScalarProperty Name="LastChangeDateTime" ColumnName="LastChangeDateTime" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-                <ScalarProperty Name="ResponsibleId" ColumnName="ResponsibleId" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
-                <ScalarProperty Name="ParentTaskId" ColumnName="ParentTaskId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAllSubteams" FunctionName="Хранилище MyTrelloEdm.GetAllSubteams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MyTrelloEdm.GetAllSubteams_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="TeamLeadId" ColumnName="TeamLeadId" />
-                <ScalarProperty Name="ParentTeamId" ColumnName="ParentTeamId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAllSubteamsIds" FunctionName="Хранилище MyTrelloEdm.GetAllSubteamsIds" />
+          <FunctionImportMapping FunctionImportName="DeleteTaskGraph" FunctionName="Хранилище MyTrelloEdm.DeleteTaskGraph" />
+          <FunctionImportMapping FunctionImportName="UpdateTaskGraphState" FunctionName="Хранилище MyTrelloEdm.UpdateTaskGraphState" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

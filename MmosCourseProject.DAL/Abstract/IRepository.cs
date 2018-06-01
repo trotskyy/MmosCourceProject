@@ -11,6 +11,9 @@ namespace MmosCourseProject.DAL.Abstract
         TEntity GetById(TKey id);
         List<TEntity> GetAll();
         void Create(TEntity entity);
+        /// <summary>
+        /// Note that deleting hierarchical entities leads to deleting all children hierarchy
+        /// </summary>
         void Delete(TEntity entity);
         void Update(TEntity entity);
     }

@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataStructures\Tree.cs" />
+    <Compile Include="DataStructures\TreeNode.cs" />
     <Compile Include="Dto\Enum\TaskPriorityDto.cs" />
     <Compile Include="Dto\Enum\TaskStateDto.cs" />
     <Compile Include="Dto\Enum\UserLevelDto.cs" />
@@ -57,13 +59,33 @@
     <Compile Include="Dto\General\TeamInfoDto.cs" />
     <Compile Include="Dto\General\UserDto.cs" />
     <Compile Include="Dto\General\UserTeamDto.cs" />
+    <Compile Include="Exceptions\DomainModelException.cs" />
+    <Compile Include="Exceptions\DtoValidationFailedException.cs" />
+    <Compile Include="Exceptions\IdNotSpecifiedException.cs" />
+    <Compile Include="Exceptions\MmosCourceProjectException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Abstract\GenericService.cs" />
+    <Compile Include="Services\Abstract\IChannelSelectService.cs" />
+    <Compile Include="Services\Abstract\IChannelService.cs" />
+    <Compile Include="Services\Abstract\IServiceFacade.cs" />
+    <Compile Include="Services\Abstract\ITaskSelectService.cs" />
+    <Compile Include="Services\Abstract\ITaskService.cs" />
+    <Compile Include="Services\Abstract\ITeamSelectService.cs" />
+    <Compile Include="Services\Abstract\ITeamService.cs" />
+    <Compile Include="Services\Abstract\IUserService.cs" />
+    <Compile Include="Services\ChannelSelectService.cs" />
+    <Compile Include="Services\ChannelService.cs" />
+    <Compile Include="Services\TaskSelectService.cs" />
+    <Compile Include="Services\TaskService.cs" />
+    <Compile Include="Services\TeamSelectService.cs" />
+    <Compile Include="Services\TeamService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\AutomapperInitializer.cs" />
+    <Compile Include="Utils\MappingExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\MmosCourseProject.DAL\MmosCourseProject.DAL.csproj">
       <Project>{49b93aa1-fa61-4f46-8edc-f5863bead2b5}</Project>
@@ -73,5 +95,6 @@
   <ItemGroup>
     <Content Include="Dto\General\_README.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

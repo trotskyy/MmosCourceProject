@@ -7,7 +7,7 @@ using MmosCourseProject.DAL;
 
 namespace MmosCourseProject.DAL.Abstract
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         IChannelRepository ChannelRepository { get; }
         IChatMessageRepository ChatMessageRepository { get; }

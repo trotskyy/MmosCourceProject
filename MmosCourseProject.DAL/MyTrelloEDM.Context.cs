@@ -48,23 +48,23 @@ namespace MmosCourseProject.DAL
         }
     
         [DbFunction("MyTrelloContext", "GetAllSubtasks")]
-        public virtual IQueryable<GetAllSubtasks_Result> GetAllSubtasks(Nullable<int> parentTaskId)
+        public virtual IQueryable<Task> GetAllSubtasks(Nullable<int> parentTaskId)
         {
             var parentTaskIdParameter = parentTaskId.HasValue ?
                 new ObjectParameter("parentTaskId", parentTaskId) :
                 new ObjectParameter("parentTaskId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetAllSubtasks_Result>("[MyTrelloContext].[GetAllSubtasks](@parentTaskId)", parentTaskIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Task>("[MyTrelloContext].[GetAllSubtasks](@parentTaskId)", parentTaskIdParameter);
         }
     
         [DbFunction("MyTrelloContext", "GetAllSubteams")]
-        public virtual IQueryable<GetAllSubteams_Result> GetAllSubteams(Nullable<int> parentTeamId)
+        public virtual IQueryable<Team> GetAllSubteams(Nullable<int> parentTeamId)
         {
             var parentTeamIdParameter = parentTeamId.HasValue ?
                 new ObjectParameter("parentTeamId", parentTeamId) :
                 new ObjectParameter("parentTeamId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetAllSubteams_Result>("[MyTrelloContext].[GetAllSubteams](@parentTeamId)", parentTeamIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Team>("[MyTrelloContext].[GetAllSubteams](@parentTeamId)", parentTeamIdParameter);
         }
     
         [DbFunction("MyTrelloContext", "GetAllSubteamsIds")]
@@ -75,6 +75,28 @@ namespace MmosCourseProject.DAL
                 new ObjectParameter("parentTeamId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<int>>("[MyTrelloContext].[GetAllSubteamsIds](@parentTeamId)", parentTeamIdParameter);
+        }
+    
+        public virtual int DeleteTaskGraph(Nullable<int> taskId)
+        {
+            var taskIdParameter = taskId.HasValue ?
+                new ObjectParameter("taskId", taskId) :
+                new ObjectParameter("taskId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteTaskGraph", taskIdParameter);
+        }
+    
+        public virtual int UpdateTaskGraphState(Nullable<int> parentTaskId, Nullable<TaskState> newState)
+        {
+            var parentTaskIdParameter = parentTaskId.HasValue ?
+                new ObjectParameter("parentTaskId", parentTaskId) :
+                new ObjectParameter("parentTaskId", typeof(int));
+    
+            var newStateParameter = newState.HasValue ?
+                new ObjectParameter("newState", newState) :
+                new ObjectParameter("newState", typeof(TaskState));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateTaskGraphState", parentTaskIdParameter, newStateParameter);
         }
     }
 }

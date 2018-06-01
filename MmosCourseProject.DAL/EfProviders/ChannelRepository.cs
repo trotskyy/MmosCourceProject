@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MmosCourseProject.DAL.Abstract;
 
-namespace MmosCourseProject.DAL
+namespace MmosCourseProject.DAL.EfProviders
 {
     public class ChannelRepository : GenericRepository<Channel, int>, IChannelRepository
     {

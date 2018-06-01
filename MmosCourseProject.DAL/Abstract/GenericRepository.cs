@@ -12,7 +12,7 @@ namespace MmosCourseProject.DAL.Abstract
     public abstract class GenericRepository<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity:class
     {
-        private MyTrelloContext _dbContext;
+        protected MyTrelloContext _dbContext;
 
         protected GenericRepository(MyTrelloContext dbContext)
         {

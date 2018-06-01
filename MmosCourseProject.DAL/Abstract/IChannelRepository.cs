@@ -9,5 +9,14 @@ namespace MmosCourseProject.DAL.Abstract
 {
     public interface IChannelRepository : IRepository<Channel, int>
     {
+        /// <summary>
+        /// Все учасники канала
+        /// </summary>
+        List<User> GetMembers(int channelId);
+
+        /// <summary>
+        /// Все каналы, которые относятся к данной команде (без учета вложенных)
+        /// </summary>
+        List<Channel> GetChannelsByTeam(int teamId);
     }
 }
