@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MmosCourseProject.BLL.Utils.DomainModelValidation.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace MmosCourseProject.BLL.Utils.DomainModelValidation
 {
-    public class DomainModelValidatorConfigurator<TUnitOfWork>
+    public class DomainModelValidatorConfigurator<TUnitOfWork> : IDomainModelValidatorConfigurator<TUnitOfWork>
+        where TUnitOfWork : class
     {
         public DomainModelValidatorConfigurator(RulesSet<TUnitOfWork> onUpdateRulesSet, RulesSet<TUnitOfWork> onDeleteRulesSet, RulesSet<TUnitOfWork> onCreateRulesSet)
         {
@@ -23,7 +25,7 @@ namespace MmosCourseProject.BLL.Utils.DomainModelValidation
         /// Configure domain constraints to check before performing UPDATE action
         /// </summary>
         /// <param name="ruleSetInitializingExpression">ruleSet.AddValidationRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null);</param>
-        public void ConfigureOnUpdate(Action<RulesSet<TUnitOfWork>> ruleSetInitializingExpression)
+        public void ConfigureOnUpdate(Action<IValidationRuleSet<TUnitOfWork>> ruleSetInitializingExpression)
         {
             ruleSetInitializingExpression.Invoke(OnUpdateRulesSet);
         }
@@ -32,7 +34,7 @@ namespace MmosCourseProject.BLL.Utils.DomainModelValidation
         /// Configure domain constraints to check before performing CREATE action
         /// </summary>
         /// <param name="ruleSetInitializingExpression">ruleSet.AddValidationRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null);</param>
-        public void ConfigureOnCreate(Action<RulesSet<TUnitOfWork>> ruleSetInitializingExpression)
+        public void ConfigureOnCreate(Action<IValidationRuleSet<TUnitOfWork>> ruleSetInitializingExpression)
         {
             ruleSetInitializingExpression.Invoke(OnCreateRulesSet);
         }
@@ -41,7 +43,7 @@ namespace MmosCourseProject.BLL.Utils.DomainModelValidation
         /// Configure domain constraints to check before performing DELETE action
         /// </summary>
         /// <param name="ruleSetInitializingExpression">ruleSet.AddValidationRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null);</param>
-        public void ConfigureOnDeletee(Action<RulesSet<TUnitOfWork>> ruleSetInitializingExpression)
+        public void ConfigureOnDelete(Action<IValidationRuleSet<TUnitOfWork>> ruleSetInitializingExpression)
         {
             ruleSetInitializingExpression.Invoke(OnDeleteRulesSet);
         }

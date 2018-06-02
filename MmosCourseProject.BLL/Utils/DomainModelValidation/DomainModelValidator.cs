@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MmosCourseProject.BLL.Utils.DomainModelValidation.Abstract;
 using MmosCourseProject.BLL.Utils.DomainModelValidation.Exceptions;
 
 namespace MmosCourseProject.BLL.Utils.DomainModelValidation
 {
     public static class DomainModelValidator<TUnitOfWork>
+        where TUnitOfWork : class
     {
         private static bool _isConfigured = false;
         private static object _configureLock = new object();
@@ -18,6 +20,7 @@ namespace MmosCourseProject.BLL.Utils.DomainModelValidation
 
 
         public static void Validate<TDbEntity>(TDbEntity entity, TUnitOfWork uow, ValidationType validationType)
+            where TDbEntity : class
         {
             if (!_isConfigured)
                 throw new DomainModelValidatorConfigurationException($"DomainModelValidator for {typeof(TUnitOfWork).Name} is not configured. Configure it in Configure() method");
@@ -43,20 +46,15 @@ namespace MmosCourseProject.BLL.Utils.DomainModelValidation
                 throw new RulesSetNotSpecifiedException(
                     $"RulesSet for {validationType.ToString("g")} validation type is not specified. Reconfigure validator");
 
-            var validationAction = rulesSet.ValidationResolver[typeof(TDbEntity)];
-            if (validationAction == null)
+            var rule = rulesSet.GetValidationRule<TDbEntity>(); 
+            if (rule == null)
                 throw new ValidationRuleUnregisteredException(
                     $"Validation rule for {typeof(TDbEntity).Name} entity ({validationType.ToString("g")} validation type) is not registered. Reconfigure validator");
 
-            //TODO finish validation logic
-            Delegate[] invocationList = validationAction.GetInvocationList();
-            foreach (var del in invocationList)
-            {
-                del.DynamicInvoke(entity, uow);
-            }
+            rule.ValidateRule(entity, uow);
         }
 
-        public static void Configure(Action<DomainModelValidatorConfigurator<TUnitOfWork>> validatorConfigurationExpression)
+        public static void Configure(Action<IDomainModelValidatorConfigurator<TUnitOfWork>> validatorConfigurationExpression)
         {
             lock(_configureLock)
             {

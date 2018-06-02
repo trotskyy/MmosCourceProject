@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MmosCourseProject.DAL;
+using MmosCourseProject.DAL.EfProviders;
 using MmosCourseProject.DAL.Abstract;
 using MmosCourseProject.BLL.Utils.DomainModelValidation;
 
@@ -19,16 +20,19 @@ namespace MmosCourseProject.BLL.Utils
             //TODO finish domain model validation logic
 
             DomainModelValidator<IUnitOfWork>.Configure(cfg => {
-                cfg.ConfigureOnCreate(rulesSet =>
+                cfg.ConfigureOnCreate(ruleSet =>
                 {
-                    rulesSet.AddValidationRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null);
+                    ruleSet.AddRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null)
+                        .Including((user, uow) => true)
+                        .ThrowingException(new Exception())
+                        .Including((user, uow) => false);
 
-
-                    rulesSet.AddValidationRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null);
-                    rulesSet.AddValidationRule<Channel>((channel, uow) => uow.ChannelRepository.GetById(channel.Id) == null);
+                    ruleSet.AddRule<Channel>((user, uow) => true);
                 });
                 cfg.ConfigureOnUpdate(rulesSet => { });
             });
+
+            DomainModelValidator<IUnitOfWork>.Validate(new Channel(), new UnitOfWork(), ValidationType.OnCreate);
         }
     }
 }

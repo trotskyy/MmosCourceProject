@@ -12,5 +12,9 @@ namespace MmosCourseProject.BLL.Utils.DomainModelValidation.Exceptions
         {
 
         }
+
+        public DomainModelValidatorConfigurationException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

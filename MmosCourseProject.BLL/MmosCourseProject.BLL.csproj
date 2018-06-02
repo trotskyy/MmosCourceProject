@@ -94,6 +94,9 @@
     <Compile Include="Services\Abstract\IUserService.cs" />
     <Compile Include="Services\ChannelSelectService.cs" />
     <Compile Include="Services\ChannelService.cs" />
+    <Compile Include="Utils\DomainModelValidation\Abstract\IDomainModelValidatorConfigurator.cs" />
+    <Compile Include="Utils\DomainModelValidation\Abstract\IValidationRule.cs" />
+    <Compile Include="Utils\DomainModelValidation\Abstract\IValidationRuleSet.cs" />
     <Compile Include="Utils\DomainModelValidation\DomainModelValidator.cs" />
     <Compile Include="Services\TaskSelectService.cs" />
     <Compile Include="Services\TaskService.cs" />
