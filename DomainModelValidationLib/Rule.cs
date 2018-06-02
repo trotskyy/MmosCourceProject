@@ -1,12 +1,12 @@
-﻿using MmosCourseProject.BLL.Utils.DomainModelValidation.Abstract;
-using MmosCourseProject.BLL.Utils.DomainModelValidation.Exceptions;
+﻿using DomainModelValidation.Abstract;
+using DomainModelValidation.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MmosCourseProject.BLL.Utils.DomainModelValidation
+namespace DomainModelValidation
 {
     public class Rule<TDbEntity, TUnitOfWork> : IValidationRule<TDbEntity, TUnitOfWork>
         where TDbEntity : class

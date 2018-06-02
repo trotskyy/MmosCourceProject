@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MmosCourseProject.BLL.Utils.DomainModelValidation.Exceptions
+namespace DomainModelValidation.Exceptions
 {
     public class DomainModelConstraintViolationException : Exception
     {

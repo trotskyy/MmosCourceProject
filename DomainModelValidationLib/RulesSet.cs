@@ -1,11 +1,11 @@
-﻿using MmosCourseProject.BLL.Utils.DomainModelValidation.Abstract;
+﻿using DomainModelValidation.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MmosCourseProject.BLL.Utils.DomainModelValidation
+namespace DomainModelValidation
 {
     /// <summary>
     /// Represent a set of validation rules

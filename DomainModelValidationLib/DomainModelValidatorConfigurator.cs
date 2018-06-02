@@ -1,11 +1,11 @@
-﻿using MmosCourseProject.BLL.Utils.DomainModelValidation.Abstract;
+﻿using DomainModelValidation.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MmosCourseProject.BLL.Utils.DomainModelValidation
+namespace DomainModelValidation
 {
     public class DomainModelValidatorConfigurator<TUnitOfWork> : IDomainModelValidatorConfigurator<TUnitOfWork>
         where TUnitOfWork : class

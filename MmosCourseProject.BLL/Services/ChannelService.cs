@@ -36,14 +36,18 @@ namespace MmosCourseProject.BLL.Services
             ValidateDto(channel);
 
             //TODO в одной тиме не должно быть двух каналов с одинаковым названием
-            ExecuteNonQuery(uow => uow.ChannelRepository.Create(channel.MapToDbEntity()));
+            Execute.NonQuery(uow =>
+            {
+                ValidateDbEntity(channel.MapToDbEntity(), uow, DomainModelValidation.ValidationType.OnCreate);
+                uow.ChannelRepository.Create(channel.MapToDbEntity());
+            });
         }
 
         public void DeleteChannel(Selectional.ChannelDto channel)
         {
             ValidateDto(channel);
 
-            ExecuteNonQuery(uow => uow.ChannelRepository.Delete(channel.MapToDbEntity()));
+            Execute.NonQuery(uow => uow.ChannelRepository.Delete(channel.MapToDbEntity()));
         }
 
         public void DeleteUserFromChannel(General.ChannelDto channel, General.UserDto user)

@@ -77,7 +77,7 @@
     <Compile Include="GetAllSubteams_Result.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="MyTrelloContext.cs" />
+    <Compile Include="MyTrelloContextPartial.cs" />
     <Compile Include="EfProviders\ChannelRepository.cs" />
     <Compile Include="ChatMessage.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
@@ -104,6 +104,7 @@
     <Compile Include="EfProviders\TeamInfoViewRepository.cs" />
     <Compile Include="EfProviders\TeamRepository.cs" />
     <Compile Include="EfProviders\UserTeamRepository.cs" />
+    <Compile Include="TeamPartial.cs" />
     <Compile Include="Task.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
@@ -163,6 +164,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainModelValidationLib\DomainModelValidationLib.csproj">
+      <Project>{abf86256-d9d1-45c5-b326-cb216898cc86}</Project>
+      <Name>DomainModelValidationLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

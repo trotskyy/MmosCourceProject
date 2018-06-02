@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MmosCourseProject.BLL.Utils.DomainModelValidation.Abstract
+namespace DomainModelValidation.Abstract
 {
     /// <summary>
     /// Represents a set of validation predicates, wich are combined and invoked in order of adding. 

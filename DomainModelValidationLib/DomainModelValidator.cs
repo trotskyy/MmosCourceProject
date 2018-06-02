@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MmosCourseProject.BLL.Utils.DomainModelValidation.Abstract;
-using MmosCourseProject.BLL.Utils.DomainModelValidation.Exceptions;
+using DomainModelValidation.Abstract;
+using DomainModelValidation.Exceptions;
+using System.Reflection;
 
-namespace MmosCourseProject.BLL.Utils.DomainModelValidation
+namespace DomainModelValidation
 {
     public static class DomainModelValidator<TUnitOfWork>
         where TUnitOfWork : class
@@ -22,8 +23,15 @@ namespace MmosCourseProject.BLL.Utils.DomainModelValidation
         public static void Validate<TDbEntity>(TDbEntity entity, TUnitOfWork uow, ValidationType validationType)
             where TDbEntity : class
         {
+            var validationAttribute = entity.GetType().GetCustomAttribute<ValidateDomainConstraintsAttribute>();
+            if (validationAttribute == null)
+                return;
+
+            if ((validationAttribute.GetValidationType() & validationType) != validationType)
+                return;
+
             if (!_isConfigured)
-                throw new DomainModelValidatorConfigurationException($"DomainModelValidator for {typeof(TUnitOfWork).Name} is not configured. Configure it in Configure() method");
+                throw new DomainModelValidatorConfigurationException($"DomainModelValidator for {typeof(TUnitOfWork).Name} is not configured. Configure it in Configure() method"); 
 
             RulesSet<TUnitOfWork> rulesSet = null;
 

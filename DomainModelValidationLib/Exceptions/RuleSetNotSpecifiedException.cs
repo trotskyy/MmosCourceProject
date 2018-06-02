@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace MmosCourseProject.BLL.Utils.DomainModelValidation.Exceptions
+namespace DomainModelValidation.Exceptions
 {
     [Serializable]
     internal class RulesSetNotSpecifiedException : Exception

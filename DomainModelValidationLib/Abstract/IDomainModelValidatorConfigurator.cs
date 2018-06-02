@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MmosCourseProject.BLL.Utils.DomainModelValidation.Abstract
+namespace DomainModelValidation.Abstract
 {
     /// <summary>
     /// Represents a set of rules devided by operation types
     /// </summary>
     public interface IDomainModelValidatorConfigurator<TUnitOfWork>
+        where TUnitOfWork:class
     {
         /// <summary>
         /// Configure domain constraints to check before performing UPDATE action

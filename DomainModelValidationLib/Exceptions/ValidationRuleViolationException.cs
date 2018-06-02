@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MmosCourseProject.BLL.Utils.DomainModelValidation.Exceptions
+namespace DomainModelValidation.Exceptions
 {
     public class ValidationRuleViolationException : Exception
     {

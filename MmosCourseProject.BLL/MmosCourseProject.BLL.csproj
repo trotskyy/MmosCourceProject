@@ -83,6 +83,7 @@
     <Compile Include="Exceptions\IdNotSpecifiedException.cs" />
     <Compile Include="Exceptions\MmosCourceProjectException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Abstract\GenericExecuteSubservice.cs" />
     <Compile Include="Services\Abstract\GenericService.cs" />
     <Compile Include="Services\Abstract\IChannelSelectService.cs" />
     <Compile Include="Services\Abstract\IChannelService.cs" />
@@ -94,25 +95,12 @@
     <Compile Include="Services\Abstract\IUserService.cs" />
     <Compile Include="Services\ChannelSelectService.cs" />
     <Compile Include="Services\ChannelService.cs" />
-    <Compile Include="Utils\DomainModelValidation\Abstract\IDomainModelValidatorConfigurator.cs" />
-    <Compile Include="Utils\DomainModelValidation\Abstract\IValidationRule.cs" />
-    <Compile Include="Utils\DomainModelValidation\Abstract\IValidationRuleSet.cs" />
-    <Compile Include="Utils\DomainModelValidation\DomainModelValidator.cs" />
     <Compile Include="Services\TaskSelectService.cs" />
     <Compile Include="Services\TaskService.cs" />
     <Compile Include="Services\TeamSelectService.cs" />
     <Compile Include="Services\TeamService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\AutomapperInitializer.cs" />
-    <Compile Include="Utils\DomainModelValidation\DomainModelValidatorConfigurator.cs" />
-    <Compile Include="Utils\DomainModelValidation\Exceptions\DomainModelConstraintViolationException.cs" />
-    <Compile Include="Utils\DomainModelValidation\Exceptions\DomainModelValidatorConfigurationException.cs" />
-    <Compile Include="Utils\DomainModelValidation\Exceptions\ValidationRuleUnregisteredException.cs" />
-    <Compile Include="Utils\DomainModelValidation\Exceptions\RuleSetNotSpecifiedException.cs" />
-    <Compile Include="Utils\DomainModelValidation\Exceptions\ValidationRuleViolationException.cs" />
-    <Compile Include="Utils\DomainModelValidation\Rule.cs" />
-    <Compile Include="Utils\DomainModelValidation\RulesSet.cs" />
-    <Compile Include="Utils\DomainModelValidation\ValidationType.cs" />
     <Compile Include="Utils\DomainModelValidatorInitializer.cs" />
     <Compile Include="Utils\Extensions\MappingExtensionsForViews.cs" />
     <Compile Include="Utils\Extensions\MappingExtensionsForEnums.cs" />
@@ -125,6 +113,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainModelValidationLib\DomainModelValidationLib.csproj">
+      <Project>{abf86256-d9d1-45c5-b326-cb216898cc86}</Project>
+      <Name>DomainModelValidationLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MmosCourseProject.DAL\MmosCourseProject.DAL.csproj">
       <Project>{49b93aa1-fa61-4f46-8edc-f5863bead2b5}</Project>
       <Name>MmosCourseProject.DAL</Name>
@@ -137,6 +129,8 @@
     <Content Include="Dto\Parameters\Updational\_README.txt" />
     <Content Include="Dto\ReturnedValues\_README.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utils\DomainModelValidation\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

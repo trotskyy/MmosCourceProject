@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MmosCourseProject.BLL.Utils.DomainModelValidation
+namespace DomainModelValidation
 {
+    [Flags]
     public enum ValidationType
     {
-        OnUpdate,
-        OnCreate,
-        OnDelete
+        OnUpdate = 1,
+        OnCreate = 2,
+        OnDelete = 4
     }
 }
