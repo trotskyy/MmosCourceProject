@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MmosCourseProject.DAL;
 using MmosCourseProject.DAL.EfProviders;
 using MmosCourseProject.DAL.Abstract;
-using MmosCourseProject.BLL.Utils.DomainModelValidation;
+using DomainModelValidation;
 
 namespace MmosCourseProject.BLL.Utils
 {
@@ -19,20 +19,36 @@ namespace MmosCourseProject.BLL.Utils
         {
             //TODO finish domain model validation logic
 
-            DomainModelValidator<IUnitOfWork>.Configure(cfg => {
-                cfg.ConfigureOnCreate(ruleSet =>
-                {
-                    ruleSet.AddRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null)
-                        .Including((user, uow) => true)
-                        .ThrowingException(new Exception())
-                        .Including((user, uow) => false);
 
-                    ruleSet.AddRule<Channel>((user, uow) => true);
-                });
-                cfg.ConfigureOnUpdate(rulesSet => { });
-            });
+            //DomainModelValidator<IUnitOfWork>.Configure(cfg =>
+            //{
+            //    cfg.ConfigureOnCreate(ruleSet => {
+            //        ruleSet.AddRule<Team>((team, uow) => {
+            //            uow.TeamRepository.GetAll().con
+            //        }).ThrowingException(new Exception())
+            //        .Including()
+            //        .Including()
+            //        .ThrowingException()
+            //    });
+            //});
 
-            DomainModelValidator<IUnitOfWork>.Validate(new Channel(), new UnitOfWork(), ValidationType.OnCreate);
+            //DomainModelValidator<T1>.Validate<T2>(new Team(), uow, ValidationType.OnCreate);
+
+            //DomainModelValidator<IUnitOfWork>.Configure(cfg => {
+            //    cfg.ConfigureOnCreate(ruleSet =>
+            //    {
+            //        ruleSet.AddRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null)
+            //            .Including((user, uow) => true)
+            //            .ThrowingException(new Exception())
+            //            .Including((user, uow) => false);
+
+            //        ruleSet.AddRule<Channel>((user, uow) => true)
+            //            .ThrowingException(new ArgumentNullException());
+            //    });
+            //    cfg.ConfigureOnUpdate(rulesSet => { });
+            //});
+
+            //DomainModelValidator<IUnitOfWork>.Validate(new Channel(), new UnitOfWork(), ValidationType.OnCreate);
         }
     }
 }

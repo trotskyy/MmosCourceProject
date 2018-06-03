@@ -23,6 +23,14 @@ namespace DomainModelValidation
         public static void Validate<TDbEntity>(TDbEntity entity, TUnitOfWork uow, ValidationType validationType)
             where TDbEntity : class
         {
+            if (!_isConfigured)
+                throw new DomainModelValidatorConfigurationException($"DomainModelValidator for {typeof(TUnitOfWork).Name} data source was not configured");
+
+            if (entity == null)
+                throw new ArgumentNullException("entity", "Cannot validate null!");
+            if (uow == null)
+                throw new ArgumentNullException("uow", $"{typeof(TUnitOfWork)} object must be sent as a parameter");
+
             var validationAttribute = entity.GetType().GetCustomAttribute<ValidateDomainConstraintsAttribute>();
             if (validationAttribute == null)
                 return;
@@ -69,8 +77,13 @@ namespace DomainModelValidation
                 if (_isConfigured)
                     throw new DomainModelValidatorConfigurationException("DomainModelValidator can be configured only once per AppDomain");
 
-                var cfg = new DomainModelValidatorConfigurator<TUnitOfWork>(_onUpdateRulesSet, _onDeleteRulesSet, _onCreateRulesSet);
+                var cfg = new DomainModelValidatorConfigurator<TUnitOfWork>();
                 validatorConfigurationExpression.Invoke(cfg);
+
+                // here
+                _onCreateRulesSet = cfg.OnCreateRulesSet;
+                _onDeleteRulesSet = cfg.OnDeleteRulesSet;
+                _onUpdateRulesSet = cfg.OnUpdateRulesSet;
 
                 _isConfigured = true;
             }

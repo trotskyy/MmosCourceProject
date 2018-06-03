@@ -6,37 +6,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainModelValidation
+namespace DomainModelValidation.Abstract
 {
-    public class Rule<TDbEntity, TUnitOfWork> : IValidationRule<TDbEntity, TUnitOfWork>
+    public abstract class Rule<TDbEntity, TUnitOfWork> //: IExceptionRule<TDbEntity, TUnitOfWork>
         where TDbEntity : class
         where TUnitOfWork : class
     {
         private List<Func<TDbEntity, TUnitOfWork, bool>> _validationRulePredicates;
 
-        private static bool isEntityValid = true;
+        [ThreadStatic]
+        protected static bool isEntityValid;
+
+        protected Exception _basicException;
 
         public void ValidateRule(TDbEntity entity, TUnitOfWork uow)
         {
             isEntityValid = true;
-            this.ThrowingException(new DomainModelConstraintViolationException());
+            this.BasicThrowingException(_basicException);
             foreach (var validationPredicate in _validationRulePredicates)
                 isEntityValid &= validationPredicate.Invoke(entity, uow);
         }
 
         public Rule(Func<TDbEntity, TUnitOfWork, bool> validationRulePredicate)
         {
+            _basicException = 
+                new DomainModelConstraintViolationException($"Validation for entity of type {typeof(TDbEntity).Name} on data source of type {typeof(TUnitOfWork).Name} failed");
+
             _validationRulePredicates = new List<Func<TDbEntity, TUnitOfWork, bool>>()
             { validationRulePredicate };
         }
 
-        public IValidationRule<TDbEntity, TUnitOfWork> Including(Func<TDbEntity, TUnitOfWork, bool> validationRulePredicate)
+        protected Rule<TDbEntity, TUnitOfWork> BasicIncluding(Func<TDbEntity, TUnitOfWork, bool> validationRulePredicate)
         {
             _validationRulePredicates.Add(validationRulePredicate);
             return this;
         }
 
-        public IValidationRule<TDbEntity, TUnitOfWork> ThrowingException(Exception exception)
+        public Rule<TDbEntity, TUnitOfWork> BasicThrowingException(Exception exception)
         {
             _validationRulePredicates.Add((dbEntity, uow) =>
             {
