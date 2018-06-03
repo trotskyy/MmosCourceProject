@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainModelValidation.Exceptions
+namespace DomainModelValidation
 {
-    public class ValidationRuleViolationException : Exception
+    public class Notification
     {
+        public string Message { get; set; }
     }
 }

@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ABF86256-D9D1-45C5-B326-CB216898CC86}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DomainModelValidationLib</RootNamespace>
-    <AssemblyName>DomainModelValidationLib</AssemblyName>
+    <ProjectGuid>{547FBD3B-4609-4FFD-A7FD-6995B72395F5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TestingValidationLib</RootNamespace>
+    <AssemblyName>TestingValidationLib</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,28 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IDomainModelValidatorConfigurator.cs" />
-    <Compile Include="Abstract\INotificationRule.cs" />
-    <Compile Include="Abstract\IExceptionRule.cs" />
-    <Compile Include="Abstract\INotificationRuleSet.cs" />
-    <Compile Include="Abstract\IExceptionRuleSet.cs" />
-    <Compile Include="Abstract\IValidationRule.cs" />
-    <Compile Include="Abstract\IValidationRuleSet.cs" />
-    <Compile Include="DomainModelValidator.cs" />
-    <Compile Include="DomainModelValidatorConfigurator.cs" />
-    <Compile Include="ExceptionRule.cs" />
-    <Compile Include="Exceptions\DomainModelConstraintViolationException.cs" />
-    <Compile Include="Exceptions\DomainModelValidatorConfigurationException.cs" />
-    <Compile Include="Exceptions\RuleSetNotSpecifiedException.cs" />
-    <Compile Include="Exceptions\ValidationRuleUnregisteredException.cs" />
-    <Compile Include="Notification.cs" />
-    <Compile Include="NotificationRule.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Abstract\Rule.cs" />
-    <Compile Include="RulesSet.cs" />
-    <Compile Include="Utils\ValidationTypeExtensions.cs" />
-    <Compile Include="ValidateDomainConstraintsAttribute.cs" />
-    <Compile Include="ValidationType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainModelValidationLib\DomainModelValidationLib.csproj">
+      <Project>{abf86256-d9d1-45c5-b326-cb216898cc86}</Project>
+      <Name>DomainModelValidationLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

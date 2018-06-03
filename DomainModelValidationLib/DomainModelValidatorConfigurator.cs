@@ -10,11 +10,8 @@ namespace DomainModelValidation
     public class DomainModelValidatorConfigurator<TUnitOfWork> : IDomainModelValidatorConfigurator<TUnitOfWork>
         where TUnitOfWork : class
     {
-        public DomainModelValidatorConfigurator(RulesSet<TUnitOfWork> onUpdateRulesSet, RulesSet<TUnitOfWork> onDeleteRulesSet, RulesSet<TUnitOfWork> onCreateRulesSet)
+        public DomainModelValidatorConfigurator()
         {
-            OnUpdateRulesSet = onUpdateRulesSet;
-            OnDeleteRulesSet = onDeleteRulesSet;
-            OnCreateRulesSet = onCreateRulesSet;
         }
 
         public RulesSet<TUnitOfWork> OnUpdateRulesSet { get; private set; }
@@ -27,6 +24,7 @@ namespace DomainModelValidation
         /// <param name="ruleSetInitializingExpression">ruleSet.AddValidationRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null);</param>
         public void ConfigureOnUpdate(Action<IValidationRuleSet<TUnitOfWork>> ruleSetInitializingExpression)
         {
+            OnUpdateRulesSet = new RulesSet<TUnitOfWork>(ValidationType.OnUpdate);
             ruleSetInitializingExpression.Invoke(OnUpdateRulesSet);
         }
 
@@ -36,6 +34,7 @@ namespace DomainModelValidation
         /// <param name="ruleSetInitializingExpression">ruleSet.AddValidationRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null);</param>
         public void ConfigureOnCreate(Action<IValidationRuleSet<TUnitOfWork>> ruleSetInitializingExpression)
         {
+            OnCreateRulesSet = new RulesSet<TUnitOfWork>(ValidationType.OnCreate);
             ruleSetInitializingExpression.Invoke(OnCreateRulesSet);
         }
 
@@ -45,6 +44,7 @@ namespace DomainModelValidation
         /// <param name="ruleSetInitializingExpression">ruleSet.AddValidationRule<User>((user, uow) => uow.UserRepository.GetById(user.Id) == null);</param>
         public void ConfigureOnDelete(Action<IValidationRuleSet<TUnitOfWork>> ruleSetInitializingExpression)
         {
+            OnDeleteRulesSet = new RulesSet<TUnitOfWork>(ValidationType.OnDelete);
             ruleSetInitializingExpression.Invoke(OnDeleteRulesSet);
         }
 
