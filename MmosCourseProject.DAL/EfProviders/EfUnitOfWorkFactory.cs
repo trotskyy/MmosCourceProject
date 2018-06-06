@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,16 @@ namespace MmosCourseProject.DAL.EfProviders
     /// </summary>
     public class EfUnitOfWorkFactory : IUnitOfWorkFactory
     {
+        private DbContext _context;
+
+        public EfUnitOfWorkFactory(DbContext context)
+        {
+            _context = context;
+        }
+
         public IUnitOfWork GetUnitOfWork()
         {
-            return new UnitOfWork();
+            return new UnitOfWork(_context);
         }
     }
 }

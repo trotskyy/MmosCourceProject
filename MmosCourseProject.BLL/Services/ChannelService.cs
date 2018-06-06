@@ -16,9 +16,11 @@ namespace MmosCourseProject.BLL.Services
     public class ChannelService : GenericService<General.ChannelDto, Channel>, IChannelService
     {
         IChannelSelectService _channelSelectService;
+        IChannelRepository _channelRepository;
 
-        public ChannelService(IUnitOfWorkFactory unitOfWorkFactory) : base(unitOfWorkFactory)
+        public ChannelService(IUnitOfWorkFactory unitOfWorkFactory, IChannelRepository channelRepository) : base(unitOfWorkFactory)
         {
+            _channelRepository = channelRepository;
         }
 
         public IChannelSelectService Get
@@ -52,7 +54,7 @@ namespace MmosCourseProject.BLL.Services
 
         public void DeleteUserFromChannel(General.ChannelDto channel, General.UserDto user)
         {
-            throw new NotImplementedException();
+            Execute.NonQuery(uow => uow.ChannelRepository.RemoveUserFromChannel(channel.MapToDbEntity(), user.MapToDbEntity()));
         }
 
         public void InviteUserToChannel(General.ChannelDto channel, string userLogin)

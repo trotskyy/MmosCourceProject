@@ -13,23 +13,24 @@ using System.Threading.Tasks;
 using General = MmosCourseProject.BLL.Dto.General;
 using Selectional = MmosCourseProject.BLL.Dto.Parameters.Selectional;
 using MmosCourseProject.BLL.Utils;
+using MmosCourseProject.BLL.Dto.Parameters.Selectional;
 
 namespace MmosCourseProject.BLL.Services
 {
-    public class ChannelSelectService : GenericService<General.ChannelDto, Channel>, IChannelSelectService
+    public class ChannelSelectService : GenericService<ChannelDto, Channel>, IChannelSelectService
     {
         public ChannelSelectService(IUnitOfWorkFactory unitOfWorkFactory) : base(unitOfWorkFactory)
         {
         }
 
-        public List<General.UserDto> ChannelMembers(Selectional.ChannelDto channel)
+        public IEnumerable<General.UserDto> ChannelMembers(ChannelDto channel)
         {
             ValidateDto(channel);
 
             return Execute.Select<General.UserDto, User>(uow => uow.ChannelRepository.GetMembers(channel.Id));
         }
 
-        public List<General.ChannelDto> ChannelsByTeam(Selectional.TeamDto team)
+        public IEnumerable<General.ChannelDto> ChannelsByTeam(TeamDto team)
         {
             ValidateDto(team);
 

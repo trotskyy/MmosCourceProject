@@ -12,9 +12,9 @@ namespace MmosCourseProject.DAL.Abstract
     public abstract class GenericRepository<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity:class
     {
-        protected MyTrelloContext _dbContext;
+        protected DbContext _dbContext;
 
-        protected GenericRepository(MyTrelloContext dbContext)
+        protected GenericRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -29,9 +29,9 @@ namespace MmosCourseProject.DAL.Abstract
             _dbContext.Entry(entity).State = EntityState.Deleted;
         }
 
-        public List<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
-            return _dbContext.Set<TEntity>().AsNoTracking().ToList();
+            return _dbContext.Set<TEntity>();
         }
 
         public TEntity GetById(TKey id)

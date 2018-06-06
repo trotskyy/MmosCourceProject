@@ -1,6 +1,7 @@
 ﻿using MmosCourseProject.DAL.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace MmosCourseProject.DAL.EfProviders
     /// </summary>
     public class UnitOfWork : IUnitOfWork
     {
-        MyTrelloContext _dbContext;
+        DbContext _dbContext;
 
         IChannelRepository _channelRepository;
         IChatMessageRepository _chatMessageRepository;
@@ -24,9 +25,9 @@ namespace MmosCourseProject.DAL.EfProviders
         ITaskInfoViewRepository _taskInfoViewRepository;
         ITeamInfoViewRepository _teamInfoViewRepository;
 
-        public UnitOfWork()
+        public UnitOfWork(DbContext dbContext)
         {
-            _dbContext = new MyTrelloContext();
+            _dbContext = dbContext;
         }
 
         public IChannelRepository ChannelRepository

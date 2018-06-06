@@ -7,10 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MmosCourseProject.BLL.Utils;
+using MmosCourseProject.BLL.Dto.Parameters.Selectional;
+using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.BLL.Services
 {
-    public class TaskSelectService : GenericService<TaskDto, DAL.Task>, ITaskSelectService
+    public class TaskSelectService : GenericService<Dto.Parameters.Selectional.TaskDto, DAL.Task>, ITaskSelectService
     {
+        public TaskSelectService(IUnitOfWorkFactory uowFactory) : base(uowFactory) { }
+
+        public List<Dto.General.TaskDto> TasksByExecutor(Dto.Parameters.Selectional.UserDto executor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

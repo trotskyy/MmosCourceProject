@@ -14,8 +14,8 @@ namespace MmosCourseProject.BLL.Services.Abstract
     /// </summary>
     public interface IChannelSelectService
     {
-        List<ChannelDto> ChannelsByTeam(Selectional.TeamDto team);
+        IEnumerable<ChannelDto> ChannelsByTeam(Selectional.TeamDto team);
 
-        List<UserDto> ChannelMembers(Selectional.ChannelDto channel);
+        IEnumerable<UserDto> ChannelMembers(Selectional.ChannelDto channel);
     }
 }

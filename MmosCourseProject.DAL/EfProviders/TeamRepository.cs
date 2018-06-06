@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace MmosCourseProject.DAL.EfProviders
 {
     public class TeamRepository : GenericRepository<Team, int>, ITeamRepository
     {
-        public TeamRepository(MyTrelloContext dbContext) : base(dbContext)
+        public TeamRepository(DbContext dbContext) : base(dbContext)
         {
         }
 

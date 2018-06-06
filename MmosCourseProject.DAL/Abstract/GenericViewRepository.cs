@@ -11,9 +11,9 @@ namespace MmosCourseProject.DAL.Abstract
     public abstract class GenericViewRepository<TEntity, TKey> : IViewRepository<TEntity, TKey>
         where TEntity:class
     {
-        private MyTrelloContext _dbContext;
+        private DbContext _dbContext;
 
-        protected GenericViewRepository(MyTrelloContext dbContext)
+        protected GenericViewRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -9,7 +9,7 @@ namespace MmosCourseProject.DAL.Abstract
     public interface IRepository<TEntity, TKey>
     {
         TEntity GetById(TKey id);
-        List<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll();
         void Create(TEntity entity);
         /// <summary>
         /// Note that deleting hierarchical entities leads to deleting all children hierarchy

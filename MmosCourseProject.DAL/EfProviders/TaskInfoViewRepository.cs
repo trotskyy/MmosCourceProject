@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace MmosCourseProject.DAL.EfProviders
 {
     public class TaskInfoViewRepository : GenericViewRepository<TaskInfoView, int>, ITaskInfoViewRepository
     {
-        public TaskInfoViewRepository(MyTrelloContext dbContext) : base(dbContext)
+        public TaskInfoViewRepository(DbContext dbContext) : base(dbContext)
         {
         }
     }

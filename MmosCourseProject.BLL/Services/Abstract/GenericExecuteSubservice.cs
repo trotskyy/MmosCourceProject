@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MmosCourseProject.BLL.Exceptions;
 using MmosCourseProject.DAL.Abstract;
+using MmosCourseProject.DAL.EfProviders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +46,9 @@ namespace MmosCourseProject.BLL.Services.Abstract
         /// <typeparam name="DbEntity">repository method result</typeparam>
         /// <param name="query">uow => uow.ChannelRepository.GetChannelsByTeam(team.Id)</param>
         /// <returns>List of Dto entities</returns>
-        public List<DtoEntity> Select<DtoEntity, DbEntity>(Func<IUnitOfWork, List<DbEntity>> query)
+        public IEnumerable<DtoEntity> Select<DtoEntity, DbEntity>(Func<IUnitOfWork, IEnumerable<DbEntity>> query)
         {
-            return GeneralExecuteSelect<List<DtoEntity>, List<DbEntity>>(query);
+            return GeneralExecuteSelect<IEnumerable<DtoEntity>, IEnumerable<DbEntity>>(query);
         }
 
         /// <summary>
@@ -56,9 +57,9 @@ namespace MmosCourseProject.BLL.Services.Abstract
         /// <typeparam name="DtoEntity">method result В какой тип замаппить результат запроса</typeparam>
         /// <param name="query">uow => uow.ChannelRepository.GetChannelsByTeam(team.Id)</param>
         /// <returns>List of Dto entities</returns>
-        public List<DtoEntity> Select<DtoEntity>(Func<IUnitOfWork, List<TDbEntity>> query)
+        public IEnumerable<DtoEntity> Select<DtoEntity>(Func<IUnitOfWork, IEnumerable<TDbEntity>> query)
         {
-            return GeneralExecuteSelect<List<DtoEntity>, List<TDbEntity>>(query);
+            return GeneralExecuteSelect<IEnumerable<DtoEntity>, IEnumerable<TDbEntity>>(query);
         }
 
         /// <summary>
@@ -66,9 +67,9 @@ namespace MmosCourseProject.BLL.Services.Abstract
         /// </summary>
         /// <param name="query">uow => uow.ChannelRepository.GetChannelsByTeam(team.Id)</param>
         /// <returns>List of Generic Dto entities</returns>
-        public List<TDtoEntity> Select(Func<IUnitOfWork, List<TDbEntity>> query)
+        public IEnumerable<TDtoEntity> Select(Func<IUnitOfWork, IEnumerable<TDbEntity>> query)
         {
-            return GeneralExecuteSelect<List<TDtoEntity>, List<TDbEntity>>(query);
+            return GeneralExecuteSelect<IEnumerable<TDtoEntity>, IEnumerable<TDbEntity>>(query);
         }
 
         ///////////////////////// single Dto

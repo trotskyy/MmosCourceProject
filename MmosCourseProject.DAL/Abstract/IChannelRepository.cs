@@ -12,11 +12,13 @@ namespace MmosCourseProject.DAL.Abstract
         /// <summary>
         /// Все учасники канала
         /// </summary>
-        List<User> GetMembers(int channelId);
+        IEnumerable<User> GetMembers(int channelId);
 
         /// <summary>
         /// Все каналы, которые относятся к данной команде (без учета вложенных)
         /// </summary>
-        List<Channel> GetChannelsByTeam(int teamId);
+        IEnumerable<Channel> GetChannelsByTeam(int teamId);
+
+        void RemoveUserFromChannel(Channel channel, User user);
     }
 }

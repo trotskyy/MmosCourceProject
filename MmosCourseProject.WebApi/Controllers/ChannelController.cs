@@ -1,4 +1,5 @@
 ﻿using MmosCourseProject.BLL.Dto.General;
+using MmosCourseProject.BLL.Services.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace MmosCourseProject.WebApi.Controllers
 {
     public class ChannelController : ApiController
     {
+        private IChannelService _channelService;
+
+        public ChannelController(IChannelService channelService)
+        {
+            _channelService = channelService;
+        }
+
         [HttpGet]
         public HttpResponseMessage GetChannelsForUser(int userId)
         {
