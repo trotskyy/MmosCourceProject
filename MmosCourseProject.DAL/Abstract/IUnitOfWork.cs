@@ -9,16 +9,7 @@ namespace MmosCourseProject.DAL.Abstract
 {
     public interface IUnitOfWork : IDisposable
     {
-        IChannelRepository ChannelRepository { get; }
-        IChatMessageRepository ChatMessageRepository { get; }
-        ICommentRepository CommentRepository { get; }
-        ITaskRepository TaskRepository { get; }
-        ITeamRepository TeamRepository { get; }
-        IUserRepository UserRepository { get; }
-        IUserTeamRepository UserTeamRepository { get; }
-
-        ITaskInfoViewRepository TaskInfoViewRepository { get; }
-        ITeamInfoViewRepository TeamInfoViewRepository { get; }
+        T Repository<T>() where T : class, IRepository;
 
         int SaveChanges();
     }

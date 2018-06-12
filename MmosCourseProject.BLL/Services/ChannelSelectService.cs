@@ -27,14 +27,14 @@ namespace MmosCourseProject.BLL.Services
         {
             ValidateDto(channel);
 
-            return Execute.Select<General.UserDto, User>(uow => uow.ChannelRepository.GetMembers(channel.Id));
+            return Execute.Select<General.UserDto, User>(uow => uow.Repository<IChannelRepository>().GetMembers(channel.MapToDbEntity()));
         }
 
         public IEnumerable<General.ChannelDto> ChannelsByTeam(TeamDto team)
         {
             ValidateDto(team);
 
-            return Execute.Select<General.ChannelDto, Channel>(uow => uow.ChannelRepository.GetChannelsByTeam(team.Id));
+            return Execute.Select<General.ChannelDto, Channel>(uow => uow.Repository<IChannelRepository>().GetChannelsByTeam(team.Id));
         }
     }
 }

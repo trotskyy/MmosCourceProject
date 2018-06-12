@@ -8,7 +8,7 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class UserTeamRepository : GenericRepository<UserTeam, int>, IUserTeamRepository
+    public class UserTeamRepository : GenericRepository<UserTeam>, IUserTeamRepository
     {
         public UserTeamRepository(DbContext dbContext) : base(dbContext)
         {

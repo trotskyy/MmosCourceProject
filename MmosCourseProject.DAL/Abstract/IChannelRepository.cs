@@ -7,12 +7,12 @@ using MmosCourseProject.DAL;
 
 namespace MmosCourseProject.DAL.Abstract
 {
-    public interface IChannelRepository : IRepository<Channel, int>
+    public interface IChannelRepository : IRepository<Channel>
     {
         /// <summary>
         /// Все учасники канала
         /// </summary>
-        IEnumerable<User> GetMembers(int channelId);
+        IEnumerable<User> GetMembers(Channel channel);
 
         /// <summary>
         /// Все каналы, которые относятся к данной команде (без учета вложенных)

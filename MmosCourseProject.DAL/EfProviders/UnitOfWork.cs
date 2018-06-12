@@ -14,110 +14,24 @@ namespace MmosCourseProject.DAL.EfProviders
     public class UnitOfWork : IUnitOfWork
     {
         DbContext _dbContext;
+        IRepositoryFactory _repositoryFactory;
+        IDictionary<Type, IRepository> _repositoryCache;
 
-        IChannelRepository _channelRepository;
-        IChatMessageRepository _chatMessageRepository;
-        ICommentRepository _commentRepository;
-        ITaskRepository _taskRepository;
-        IUserRepository _userRepository;
-        ITeamRepository _teamRepository;
-        IUserTeamRepository _userTeamRepository;
-        ITaskInfoViewRepository _taskInfoViewRepository;
-        ITeamInfoViewRepository _teamInfoViewRepository;
-
-        public UnitOfWork(DbContext dbContext)
+        public UnitOfWork(DbContext dbContext, IRepositoryFactory repositoryFactory)
         {
             _dbContext = dbContext;
+            _repositoryFactory = repositoryFactory;
+            _repositoryCache = new Dictionary<Type, IRepository>();
         }
 
-        public IChannelRepository ChannelRepository
-        { 
-            get
-            {
-                if (_channelRepository == null)
-                    _channelRepository = new ChannelRepository(_dbContext);
-                return _channelRepository;
-            }
-        }
-
-        public IChatMessageRepository ChatMessageRepository
+        T IUnitOfWork.Repository<T>()
         {
-            get
-            {
-                if (_chatMessageRepository == null)
-                    _chatMessageRepository = new ChatMessageRepository(_dbContext);
-                return _chatMessageRepository;
-            }
-        }
-
-        public ICommentRepository CommentRepository
-        {
-            get
-            {
-                if (_commentRepository == null)
-                    _commentRepository = new CommentRepository(_dbContext);
-                return _commentRepository;
-            }
-        }
-
-        public ITaskRepository TaskRepository
-        {
-            get
-            {
-                if (_taskRepository == null)
-                    _taskRepository = new TaskRepository(_dbContext);
-                return _taskRepository;
-            }
-        }
-
-        public IUserRepository UserRepository
-        {
-            get
-            {
-                if (_userRepository == null)
-                    _userRepository = new UserRepository(_dbContext);
-                return _userRepository;
-            }
-        }
-
-        public ITeamRepository TeamRepository
-        {
-            get
-            {
-                if (_teamRepository == null)
-                    _teamRepository = new TeamRepository(_dbContext);
-                return _teamRepository;
-            }
-        }
-
-        public IUserTeamRepository UserTeamRepository
-        {
-            get
-            {
-                if (_userTeamRepository == null)
-                    _userTeamRepository = new UserTeamRepository(_dbContext);
-                return _userTeamRepository;
-            }
-        }
-
-        public ITaskInfoViewRepository TaskInfoViewRepository
-        {
-            get
-            {
-                if (_taskInfoViewRepository == null)
-                    _taskInfoViewRepository = new TaskInfoViewRepository(_dbContext);
-                return _taskInfoViewRepository;
-            }
-        }
-
-        public ITeamInfoViewRepository TeamInfoViewRepository
-        {
-            get
-            {
-                if (_teamInfoViewRepository == null)
-                    _teamInfoViewRepository = new TeamInfoViewRepository(_dbContext);
-                return _teamInfoViewRepository;
-            }
+            Type repositoryType = typeof(T);
+            if (_repositoryCache.Keys.Contains(repositoryType))
+                return _repositoryCache[repositoryType] as T;
+            var repository = _repositoryFactory.CreateRepository<T>();
+            _repositoryCache.Add(repositoryType, repository);
+            return repository;
         }
 
         public void Dispose()

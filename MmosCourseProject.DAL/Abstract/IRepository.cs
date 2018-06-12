@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace MmosCourseProject.DAL.Abstract
 {
-    public interface IRepository<TEntity, TKey>
+    public interface IRepository<TEntity> : IRepository
     {
-        TEntity GetById(TKey id);
-        IEnumerable<TEntity> GetAll();
-        void Create(TEntity entity);
+        TEntity Get(Func<TEntity, bool> predicate);
+        IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate = null);
+        void Add(TEntity entity);
+        void Attach(TEntity entity);
         /// <summary>
         /// Note that deleting hierarchical entities leads to deleting all children hierarchy
         /// </summary>
         void Delete(TEntity entity);
-        void Update(TEntity entity);
     }
+
+    public interface IRepository { }
 }

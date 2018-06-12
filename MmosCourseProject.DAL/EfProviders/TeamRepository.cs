@@ -8,7 +8,7 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class TeamRepository : GenericRepository<Team, int>, ITeamRepository
+    public class TeamRepository : GenericRepository<Team>, ITeamRepository
     {
         public TeamRepository(DbContext dbContext) : base(dbContext)
         {

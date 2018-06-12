@@ -6,42 +6,50 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using MmosCourseProject.DAL;
+using System.Data.Entity.Core.Objects;
 
 namespace MmosCourseProject.DAL.Abstract
 {
-    public abstract class GenericRepository<TEntity, TKey> : IRepository<TEntity, TKey>
+    public abstract class GenericRepository<TEntity> : IRepository<TEntity>
         where TEntity:class
     {
         protected DbContext _dbContext;
+        IDbSet<TEntity> _dbSet;
 
         protected GenericRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
+            _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public void Create(TEntity entity)
+        public IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate = null)
         {
-            _dbContext.Set<TEntity>().Add(entity);
+            if (predicate != null)
+            {
+                return _dbSet.Where(predicate);
+            }
+
+            return _dbSet.AsEnumerable();
+        }
+
+        public TEntity Get(Func<TEntity, bool> predicate)
+        {
+            return _dbSet.First(predicate);
+        }
+
+        public void Add(TEntity entity)
+        {
+            _dbSet.Add(entity);
+        }
+
+        public void Attach(TEntity entity)
+        {
+            _dbSet.Attach(entity);
         }
 
         public virtual void Delete(TEntity entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Deleted;
-        }
-
-        public IEnumerable<TEntity> GetAll()
-        {
-            return _dbContext.Set<TEntity>();
-        }
-
-        public TEntity GetById(TKey id)
-        {
-            return _dbContext.Set<TEntity>().Find(id);
-        }
-
-        public virtual void Update(TEntity entity)
-        {
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            _dbSet.Remove(entity);
         }
     }
 }

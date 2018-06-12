@@ -8,7 +8,7 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class ChannelRepository : GenericRepository<Channel, int>, IChannelRepository
+    public class ChannelRepository : GenericRepository<Channel>, IChannelRepository
     {
         public ChannelRepository(DbContext dbContext) : base(dbContext) { }
 
@@ -18,9 +18,9 @@ namespace MmosCourseProject.DAL.EfProviders
             return result;
         }
 
-        public IEnumerable<User> GetMembers(int channelId)
+        public IEnumerable<User> GetMembers(Channel channel)
         {
-            var result = GetById(channelId).Users;
+            var result = Get(x => x.Id == channel.Id).Users;
             return result;
         }
 

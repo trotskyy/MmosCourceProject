@@ -11,18 +11,18 @@ namespace MmosCourseProject.DAL.EfProviders
     /// <summary>
     /// Entity framewor unit of work factory
     /// </summary>
-    public class EfUnitOfWorkFactory : IUnitOfWorkFactory
+    public class UnitOfWorkFactory : IUnitOfWorkFactory
     {
-        private DbContext _context;
+        private Func<IUnitOfWork> _resolveUOW;
 
-        public EfUnitOfWorkFactory(DbContext context)
+        public UnitOfWorkFactory(Func<IUnitOfWork> resolveUOW)
         {
-            _context = context;
+            _resolveUOW = resolveUOW;
         }
 
         public IUnitOfWork GetUnitOfWork()
         {
-            return new UnitOfWork(_context);
+            return _resolveUOW();
         }
     }
 }

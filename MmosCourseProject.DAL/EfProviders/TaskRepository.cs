@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class TaskRepository : GenericRepository<Task, int>, ITaskRepository
+    public class TaskRepository : GenericRepository<Task>, ITaskRepository
     {
         public TaskRepository(DbContext dbContext) : base(dbContext) { }
 

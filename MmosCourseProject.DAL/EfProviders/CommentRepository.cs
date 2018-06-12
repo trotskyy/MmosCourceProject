@@ -8,7 +8,7 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class CommentRepository : GenericRepository<Comment, int>, ICommentRepository
+    public class CommentRepository : GenericRepository<Comment>, ICommentRepository
     {
         public CommentRepository(DbContext dbContext) : base(dbContext)
         {

@@ -28,10 +28,40 @@ namespace MmosCourseProject.WebApi.IoC
         {
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            builder.RegisterType<MyTrelloContext>().As<DbContext>().InstancePerRequest();
-            builder.RegisterType<EfUnitOfWorkFactory>().As<IUnitOfWorkFactory>().InstancePerRequest();
+            #region Register UOW
+
+            builder.RegisterType<MyTrelloContext>().As<DbContext>();
+            builder.RegisterType<UnitOfWorkFactory>().As<IUnitOfWorkFactory>().SingleInstance();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.Register<Func<IUnitOfWork>>(
+                c =>
+                {
+                    var context = c.Resolve<IComponentContext>();
+                    return () => context.Resolve<IUnitOfWork>();
+                })
+            .SingleInstance();
+
+            #endregion
+
+            #region Register Repositories
+
+            builder.RegisterType<ChannelRepository>().As<IChannelRepository>();
+            builder.Register<Func<IRepository>>(
+                 c =>
+                 {
+                     var context = c.Resolve<IComponentContext>();
+                     return () => context.Resolve<IChannelRepository>();
+                 })
+             .WithMetadata<RepositoryMetadata>(m => m.For(p => p.TargetType, typeof(IChannelRepository)))
+             .SingleInstance();
+
+            #endregion
+
+            #region Register Services
 
             builder.RegisterType<ChannelService>().As<IChannelService>().InstancePerRequest();
+
+            #endregion
 
             return builder.Build();
         }

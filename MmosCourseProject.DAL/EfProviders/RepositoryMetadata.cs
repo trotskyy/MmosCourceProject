@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MmosCourseProject.DAL;
 
-namespace MmosCourseProject.DAL.Abstract
+namespace MmosCourseProject.DAL.EfProviders
 {
-    public interface IUserRepository : IRepository<User>
+    public class RepositoryMetadata
     {
-        
+        public Type TargetType { get; set; }
     }
 }

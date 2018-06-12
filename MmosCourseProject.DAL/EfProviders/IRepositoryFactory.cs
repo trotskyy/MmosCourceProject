@@ -1,17 +1,14 @@
 ﻿using MmosCourseProject.DAL.Abstract;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class UserRepository : GenericRepository<User>, IUserRepository
+    public interface IRepositoryFactory
     {
-        public UserRepository(DbContext dbContext) : base(dbContext)
-        {
-        }
+        T CreateRepository<T>() where T : class;
     }
 }

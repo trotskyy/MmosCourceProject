@@ -41,7 +41,7 @@ namespace MmosCourseProject.BLL.Services
             Execute.NonQuery(uow =>
             {
                 ValidateDbEntity(channel.MapToDbEntity(), uow, DomainModelValidation.ValidationType.OnCreate);
-                uow.ChannelRepository.Create(channel.MapToDbEntity());
+                uow.Repository<IChannelRepository>().Add(channel.MapToDbEntity());
             });
         }
 
@@ -49,12 +49,12 @@ namespace MmosCourseProject.BLL.Services
         {
             ValidateDto(channel);
 
-            Execute.NonQuery(uow => uow.ChannelRepository.Delete(channel.MapToDbEntity()));
+            Execute.NonQuery(uow => uow.Repository<IChannelRepository>().Delete(channel.MapToDbEntity()));
         }
 
         public void DeleteUserFromChannel(General.ChannelDto channel, General.UserDto user)
         {
-            Execute.NonQuery(uow => uow.ChannelRepository.RemoveUserFromChannel(channel.MapToDbEntity(), user.MapToDbEntity()));
+            Execute.NonQuery(uow => uow.Repository<IChannelRepository>().RemoveUserFromChannel(channel.MapToDbEntity(), user.MapToDbEntity()));
         }
 
         public void InviteUserToChannel(General.ChannelDto channel, string userLogin)

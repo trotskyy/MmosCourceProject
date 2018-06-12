@@ -37,6 +37,7 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -70,7 +71,11 @@
     <Compile Include="Comment.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="EfProviders\EfUnitOfWorkFactory.cs" />
+    <Compile Include="EfProviders\GeneralFactoryWithMetadata.cs" />
+    <Compile Include="EfProviders\IRepositoryFactory.cs" />
+    <Compile Include="EfProviders\RepositoryFactory.cs" />
+    <Compile Include="EfProviders\RepositoryMetadata.cs" />
+    <Compile Include="EfProviders\UnitOfWorkFactory.cs" />
     <Compile Include="GetAllSubtasks_Result.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>
