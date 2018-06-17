@@ -41,7 +41,7 @@ namespace MmosCourseProject.BLL.Services
             Execute.NonQuery(uow =>
             {
                 ValidateDbEntity(channel.MapToDbEntity(), uow, DomainModelValidation.ValidationType.OnCreate);
-                uow.Repository<IChannelRepository>().Add(channel.MapToDbEntity());
+                uow.Repository<IChannelRepository>().Create(channel.MapToDbEntity());
             });
         }
 

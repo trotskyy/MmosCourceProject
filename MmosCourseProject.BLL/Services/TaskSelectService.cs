@@ -12,11 +12,11 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.BLL.Services
 {
-    public class TaskSelectService : GenericService<Dto.Parameters.Selectional.TaskDto, DAL.Task>, ITaskSelectService
+    public class TaskSelectService : GenericService<Dto.General.TaskDto, DAL.Task>, ITaskSelectService
     {
         public TaskSelectService(IUnitOfWorkFactory uowFactory) : base(uowFactory) { }
 
-        public List<Dto.General.TaskDto> TasksByExecutor(Dto.Parameters.Selectional.UserDto executor)
+        public IEnumerable<Dto.General.TaskDto> TasksByExecutor(Dto.Parameters.Selectional.UserDto executor)
         {
             ValidateDto(executor);
 

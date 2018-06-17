@@ -13,11 +13,11 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.BLL.Services
 {
-    public class TeamSelectService : GenericService<Dto.Parameters.Selectional.TeamDto, Team>, ITeamSelectService
+    public class TeamSelectService : GenericService<Dto.General.TeamDto, Team>, ITeamSelectService
     {
         public TeamSelectService(IUnitOfWorkFactory uowFactory) : base(uowFactory) { }
 
-        public List<Dto.General.TeamDto> RootTeamsByName(string name, bool strictlyMatching)
+        public IEnumerable<Dto.General.TeamDto> RootTeamsByName(string name, bool strictlyMatching)
         {
             throw new NotImplementedException();
         }
@@ -27,12 +27,12 @@ namespace MmosCourseProject.BLL.Services
             throw new NotImplementedException();
         }
 
-        public List<Dto.General.UserDto> TeamParticipants(Dto.Parameters.Selectional.TeamDto team, bool includingSubteams)
+        public IEnumerable<Dto.General.UserDto> TeamParticipants(Dto.Parameters.Selectional.TeamDto team, bool includingSubteams)
         {
             throw new NotImplementedException();
         }
 
-        public List<Dto.General.TeamDto> TeamsByMember(Dto.Parameters.Selectional.UserDto member)
+        public IEnumerable<Dto.General.TeamDto> TeamsByMember(Dto.Parameters.Selectional.UserDto member)
         {
             throw new NotImplementedException();
         }
