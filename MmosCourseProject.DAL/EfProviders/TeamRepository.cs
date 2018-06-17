@@ -8,7 +8,7 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class TeamRepository : EfGenericRepository<Team, int>, ITeamRepository
+    public class TeamRepository : GenericRepository<Team, int, MyTrelloContext>, ITeamRepository
     {
         public TeamRepository(MyTrelloContext dbContext) : base(dbContext)
         {

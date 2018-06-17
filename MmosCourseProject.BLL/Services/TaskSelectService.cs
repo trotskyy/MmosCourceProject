@@ -18,7 +18,9 @@ namespace MmosCourseProject.BLL.Services
 
         public List<Dto.General.TaskDto> TasksByExecutor(Dto.Parameters.Selectional.UserDto executor)
         {
-            throw new NotImplementedException();
+            ValidateDto(executor);
+
+            return Execute.Select(uow => uow.Repository<ITaskRepository>().Get(t => t.Executors.Contains(executor.MapToDbEntity())));
         }
     }
 }

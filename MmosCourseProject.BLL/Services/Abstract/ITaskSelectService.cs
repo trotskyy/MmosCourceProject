@@ -14,6 +14,6 @@ namespace MmosCourseProject.BLL.Services.Abstract
     /// </summary>
     public interface ITaskSelectService
     {
-        List<General.TaskDto> TasksByExecutor(Selectional.UserDto executor);
+        IEnumerable<General.TaskDto> TasksByExecutor(Selectional.UserDto executor);
     }
 }

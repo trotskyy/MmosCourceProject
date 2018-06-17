@@ -8,7 +8,7 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class ChannelRepository : EfGenericRepository<Channel, int>, IChannelRepository
+    public class ChannelRepository : GenericRepository<Channel, int, MyTrelloContext>, IChannelRepository
     {
         public ChannelRepository(MyTrelloContext dbContext) : base(dbContext) { }
 

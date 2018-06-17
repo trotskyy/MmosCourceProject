@@ -9,6 +9,8 @@ namespace MmosCourseProject.DAL.EfProviders
 {
     public interface IRepositoryFactory
     {
-        T CreateRepository<T>() where T : class;
+        TRepository CreateRepository<TRepository, TEntity, TKey>() 
+            where TRepository : class
+            where TEntity : class;
     }
 }

@@ -40,8 +40,7 @@ namespace MmosCourseProject.BLL.Services
             //TODO в одной тиме не должно быть двух каналов с одинаковым названием
             Execute.NonQuery(uow =>
             {
-                ValidateDbEntity(channel.MapToDbEntity(), uow, DomainModelValidation.ValidationType.OnCreate);
-                uow.Repository<IChannelRepository>().Add(channel.MapToDbEntity());
+                uow.Repository<IChannelRepository>().Create(channel.MapToDbEntity());
             });
         }
 
@@ -59,7 +58,10 @@ namespace MmosCourseProject.BLL.Services
 
         public void InviteUserToChannel(General.ChannelDto channel, string userLogin)
         {
-            throw new NotImplementedException();
+            Execute.NonQuery(uow => {
+                var c = uow.Repository<IChannelRepository>().GetById(channel.Id);
+
+            });
         }
 
         public void SendMessage(General.ChatMessageDto chatMessage)

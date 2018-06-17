@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using MmosCourseProject.DAL;
 using System.Data.Entity.Core.Objects;
+using DomainModelValidation;
 
 namespace MmosCourseProject.DAL.Abstract
 {
@@ -15,10 +16,6 @@ namespace MmosCourseProject.DAL.Abstract
         where TEntity:class
         where TDbContext : DbContext
     {
-        protected abstract void ValidateOnCreate(TEntity entity);
-        protected abstract void ValidateOnDelete(TEntity entity);
-        protected abstract void ValidateOnUpdate(TEntity entity);
-
         public GenericRepository(TDbContext dbContext) : base(dbContext)
         {
         }
@@ -28,7 +25,7 @@ namespace MmosCourseProject.DAL.Abstract
             if (entity == null)
                 throw new ArgumentNullException();
 
-            ValidateOnCreate(entity);
+            DomainModelValidator<TDbContext>.Validate(entity, _dbContext, ValidationType.OnCreate);
 
             _dbContext.Set<TEntity>().Add(entity);
         }
@@ -38,7 +35,7 @@ namespace MmosCourseProject.DAL.Abstract
             if (entity == null)
                 throw new ArgumentNullException();
 
-            ValidateOnDelete(entity);
+            DomainModelValidator<TDbContext>.Validate(entity, _dbContext, ValidationType.OnDelete);
 
             if (_dbContext.Entry<TEntity>(entity).State == EntityState.Detached)
                 _dbContext.Set<TEntity>().Attach(entity);
@@ -50,7 +47,7 @@ namespace MmosCourseProject.DAL.Abstract
             if (entity == null)
                 throw new ArgumentNullException();
 
-            ValidateOnUpdate(entity);
+            DomainModelValidator<TDbContext>.Validate(entity, _dbContext, ValidationType.OnUpdate);
 
             _dbContext.Set<TEntity>().Attach(entity);
             _dbContext.Entry<TEntity>(entity).State = EntityState.Modified;

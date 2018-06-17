@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EfProviders\EfGenericRepository.cs" />
     <Compile Include="Abstract\GenericRepository.cs" />
     <Compile Include="Abstract\GenericReadOnlyRepository.cs" />
     <Compile Include="Abstract\IChannelRepository.cs" />

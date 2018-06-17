@@ -22,14 +22,14 @@ namespace MmosCourseProject.BLL.Services.Abstract
         /// <param name="name"></param>
         /// <param name="strictlyMatching">false = LIKE '%name%'</param>
         /// <returns></returns>
-        List<General.TeamDto> RootTeamsByName(string name, bool strictlyMatching);
+        IEnumerable<General.TeamDto> RootTeamsByName(string name, bool strictlyMatching);
 
         /// <summary>
         /// Получение списка команд верхнего уровня для пользователя
         /// </summary>
         /// <param name="member">Id required</param>
         /// <returns></returns>
-        List<General.TeamDto> TeamsByMember(Selectional.UserDto member);
+        IEnumerable<General.TeamDto> TeamsByMember(Selectional.UserDto member);
 
         /// <summary>
         /// All subteams and their subteans and ...
@@ -44,6 +44,6 @@ namespace MmosCourseProject.BLL.Services.Abstract
         /// <param name="team"></param>
         /// <param name="includingSubteams">включая участников подкоманд</param>
         /// <returns></returns>
-        List<General.UserDto> TeamParticipants(Selectional.TeamDto team, bool includingSubteams);
+        IEnumerable<General.UserDto> TeamParticipants(Selectional.TeamDto team, bool includingSubteams);
     }
 }

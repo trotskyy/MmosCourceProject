@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class TaskRepository : EfGenericRepository<Task, int>, ITaskRepository
+    public class TaskRepository : GenericRepository<Task, int, MyTrelloContext>, ITaskRepository
     {
         public TaskRepository(MyTrelloContext dbContext) : base(dbContext) { }
 
