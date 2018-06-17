@@ -140,6 +140,38 @@ namespace MmosCourseProject.BLL.Utils
         }
 
         /*
+         * Team
+         */
+        /// <summary>
+        /// Map using Automapper
+        /// </summary>
+        public static Team MapToDbEntity(this TeamDto dto)
+        {
+            return Mapper.Map<Team>(dto);
+        }
+        /// <summary>
+        /// Map using Automapper
+        /// </summary>
+        public static TeamDto MapToDto(this Team dbe)
+        {
+            return Mapper.Map<TeamDto>(dbe);
+        }
+        /// <summary>
+        /// Map using Automapper
+        /// </summary>
+        public static List<Team> MapToDbEntity(this List<TeamDto> dto)
+        {
+            return Mapper.Map<List<Team>>(dto);
+        }
+        /// <summary>
+        /// Map using Automapper
+        /// </summary>
+        public static List<TeamDto> MapToDto(this List<Team> dbe)
+        {
+            return Mapper.Map<List<TeamDto>>(dbe);
+        }
+
+        /*
          * User
          */
         /// <summary>

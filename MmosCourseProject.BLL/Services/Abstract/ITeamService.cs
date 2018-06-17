@@ -15,7 +15,7 @@ namespace MmosCourseProject.BLL.Services.Abstract
         ITeamSelectService Get { get; }
 
         //TODO if team is a root team (no parentTeamId) teamName must be unique among all root teams
-        General.TeamDto CreateTeam(Creational.TeamDto team);
+        void CreateTeam(Creational.TeamDto team);
 
         /// <summary>
         /// Удаление команды (только тимлид)

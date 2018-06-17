@@ -16,12 +16,8 @@ namespace MmosCourseProject.BLL.Services
     public class ChannelService : GenericService<General.ChannelDto, Channel>, IChannelService
     {
         IChannelSelectService _channelSelectService;
-        IChannelRepository _channelRepository;
 
-        public ChannelService(IUnitOfWorkFactory unitOfWorkFactory, IChannelRepository channelRepository) : base(unitOfWorkFactory)
-        {
-            _channelRepository = channelRepository;
-        }
+        public ChannelService(IUnitOfWorkFactory unitOfWorkFactory) : base(unitOfWorkFactory) { }
 
         public IChannelSelectService Get
         {
@@ -60,14 +56,18 @@ namespace MmosCourseProject.BLL.Services
         public void InviteUserToChannel(General.ChannelDto channel, string userLogin)
         {
             Execute.NonQuery(uow => {
-                var c = uow.Repository<IChannelRepository>().GetById(channel.Id);
-
+                var chnl = uow.Repository<IChannelRepository>().GetById(channel.Id);
+                var user = uow.Repository<IUserRepository>().GetFirst(u => u.Email == userLogin);
+                chnl.Users.Add(user);
             });
         }
 
         public void SendMessage(General.ChatMessageDto chatMessage)
         {
-            throw new NotImplementedException();
+            Execute.NonQuery(uow => {
+                var chnl = uow.Repository<IChannelRepository>().GetById(chatMessage.ChannelId);
+                uow.Repository<IChatMessageRepository>().Create(chatMessage.MapToDbEntity());
+            });
         }
     }
 }

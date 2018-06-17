@@ -20,22 +20,31 @@ namespace MmosCourseProject.BLL.Services
 
         public bool AreEmailAndPasswordValid(string email, string password)
         {
-            throw new NotImplementedException();
+            var hash = CalculatePasswordHash(password);
+            var user = Execute.Select(uow => uow.Repository<IUserRepository>().GetFirst(u => u.Email == email && u.PasswordHash == hash));
+            return user != null;
         }
 
         public int CreateAccount(Dto.Parameters.Creational.UserDto user)
         {
-            throw new NotImplementedException();
+            var createUser = user.MapToDbEntity();
+            Execute.NonQuery(uow => uow.Repository<IUserRepository>().Create(createUser));
+            return createUser.Id;
         }
 
         public void DeleteAccount(Dto.Parameters.Selectional.UserDto user)
         {
-            throw new NotImplementedException();
+            Execute.NonQuery(uow => uow.Repository<IUserRepository>().Delete(user.MapToDbEntity()));
         }
 
         public void EditBio(Dto.Parameters.Updational.UserDto user)
         {
-            throw new NotImplementedException();
+            Execute.NonQuery(uow => uow.Repository<IUserRepository>().Update(user.MapToDbEntity()));
+        }
+
+        private string CalculatePasswordHash(string password)
+        {
+            return string.Empty;
         }
     }
 }

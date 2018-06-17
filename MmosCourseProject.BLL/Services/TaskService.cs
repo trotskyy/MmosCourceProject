@@ -17,38 +17,51 @@ namespace MmosCourseProject.BLL.Services
 {
     public class TaskService : GenericService<Dto.General.TaskDto, DAL.Task>, ITaskService
     {
+        private ITaskSelectService _taskSelectService;
+
         public TaskService(IUnitOfWorkFactory ouwFactory) : base(ouwFactory) { }
 
-        public ITaskSelectService Get => throw new NotImplementedException();
+        public ITaskSelectService Get
+        {
+            get
+            {
+                if (_taskSelectService == null)
+                    _taskSelectService = new TaskSelectService(_unitOfWorkFactory);
+                return _taskSelectService;
+            }
+        }
 
         public void CreateTask(Dto.Parameters.Creational.TaskDto task)
         {
-            throw new NotImplementedException();
+            Execute.NonQuery(uow => uow.Repository<ITaskRepository>().Create(task.MapToDbEntity()));
         }
 
         public void CreateTaskComment(Dto.Parameters.Creational.CommentDto comment)
         {
-            throw new NotImplementedException();
+            Execute.NonQuery(uow => uow.Repository<ICommentRepository>().Create(comment.MapToDbEntity()));
         }
 
         public void DeleteTaskComment(Dto.Parameters.Selectional.CommentDto comment)
         {
-            throw new NotImplementedException();
+            Execute.NonQuery(uow => uow.Repository<ICommentRepository>().Delete(comment.MapToDbEntity()));
         }
 
         public void DeleteTaskTree(Dto.Parameters.Selectional.TaskDto parentTask)
         {
-            throw new NotImplementedException();
+            Execute.NonQuery(uow => uow.Repository<ITaskRepository>().Delete(parentTask.MapToDbEntity()));
         }
 
         public void UpdateTask(Dto.Parameters.Updational.TaskDto task)
         {
-            throw new NotImplementedException();
+            Execute.NonQuery(uow => uow.Repository<ITaskRepository>().Update(task.MapToDbEntity()));
         }
 
         public void UpdateTaskGraphState(TaskStateDto taskState, int taskId)
         {
-            throw new NotImplementedException();
+            var updateTaskDTO = new Dto.Parameters.Updational.TaskDto();
+            updateTaskDTO.Id = taskId;
+            updateTaskDTO.State = taskState;
+            Execute.NonQuery(uow => uow.Repository<ITaskRepository>().Update(updateTaskDTO.MapToDbEntity()));
         }
     }
 }
