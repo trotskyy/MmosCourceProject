@@ -15,13 +15,13 @@ namespace MmosCourseProject.DAL.EfProviders
     {
         DbContext _dbContext;
         IRepositoryFactory _repositoryFactory;
-        IDictionary<Type, object> _repositoryCache;
+        IDictionary<Type, IRepository> _repositoryCache;
 
         public UnitOfWork(DbContext dbContext, IRepositoryFactory repositoryFactory)
         {
             _dbContext = dbContext;
             _repositoryFactory = repositoryFactory;
-            _repositoryCache = new Dictionary<Type, object>();
+            _repositoryCache = new Dictionary<Type, IRepository>();
         }
 
         T IUnitOfWork.Repository<T>()
