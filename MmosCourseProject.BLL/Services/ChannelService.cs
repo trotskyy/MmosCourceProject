@@ -40,7 +40,8 @@ namespace MmosCourseProject.BLL.Services
             //TODO в одной тиме не должно быть двух каналов с одинаковым названием
             Execute.NonQuery(uow =>
             {
-                uow.Repository<IChannelRepository>().Create(channel.MapToDbEntity());
+                ValidateDbEntity(channel.MapToDbEntity(), uow, DomainModelValidation.ValidationType.OnCreate);
+                uow.Repository<IChannelRepository>().Add(channel.MapToDbEntity());
             });
         }
 
