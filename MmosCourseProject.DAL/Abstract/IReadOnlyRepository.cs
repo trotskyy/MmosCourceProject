@@ -10,7 +10,7 @@ namespace MmosCourseProject.DAL.Abstract
     /// <summary>
     /// Use for views
     /// </summary>
-    public interface IReadOnlyRepository<TEntity, TKey>
+    public interface IReadOnlyRepository<TEntity, TKey> : IRepository
         where TEntity : class
     {
         IEnumerable<TEntity> GetAll(
@@ -35,4 +35,6 @@ namespace MmosCourseProject.DAL.Abstract
 
         int GetCount(Expression<Func<TEntity, bool>> filter = null);
     }
+
+    public interface IRepository { }
 }
