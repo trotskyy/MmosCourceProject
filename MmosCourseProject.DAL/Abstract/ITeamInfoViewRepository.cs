@@ -1,6 +1,6 @@
 ﻿namespace MmosCourseProject.DAL.Abstract
 {
-    public interface ITeamInfoViewRepository : IViewRepository<TeamInfoView, int>
+    public interface ITeamInfoViewRepository : IReadOnlyRepository<TeamInfoView, int>
     {
     }
 }

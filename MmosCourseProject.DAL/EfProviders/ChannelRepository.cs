@@ -8,9 +8,9 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class ChannelRepository : GenericRepository<Channel>, IChannelRepository
+    public class ChannelRepository : EfGenericRepository<Channel, int>, IChannelRepository
     {
-        public ChannelRepository(DbContext dbContext) : base(dbContext) { }
+        public ChannelRepository(MyTrelloContext dbContext) : base(dbContext) { }
 
         public IEnumerable<Channel> GetChannelsByTeam(int teamId)
         {
@@ -20,8 +20,8 @@ namespace MmosCourseProject.DAL.EfProviders
 
         public IEnumerable<User> GetMembers(Channel channel)
         {
-            var result = Get(x => x.Id == channel.Id).Users;
-            return result;
+            var result = Get(x => x.Id == channel.Id).AsEnumerable();//.me;
+            return new List<User>();
         }
 
         public void RemoveUserFromChannel(Channel channel, User user)

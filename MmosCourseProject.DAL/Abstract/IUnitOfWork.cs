@@ -9,7 +9,10 @@ namespace MmosCourseProject.DAL.Abstract
 {
     public interface IUnitOfWork : IDisposable
     {
-        T Repository<T>() where T : class, IRepository;
+        T Repository<T>()
+            where T : class;
+            //where T : class, IRepository<TEntity, TKey> 
+            //where TEntity:class;
 
         int SaveChanges();
     }

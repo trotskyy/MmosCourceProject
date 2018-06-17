@@ -7,7 +7,7 @@ using MmosCourseProject.DAL;
 
 namespace MmosCourseProject.DAL.Abstract
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<User, int>
     {
         
     }

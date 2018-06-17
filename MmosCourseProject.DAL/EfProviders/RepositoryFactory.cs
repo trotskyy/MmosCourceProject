@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class RepositoryFactory : GeneralFactoryWithMetadata<IRepository, RepositoryMetadata>, IRepositoryFactory
+    public class RepositoryFactory<TEntity, TKey> : 
+        GeneralFactoryWithMetadata<IRepository<TEntity, TKey>, RepositoryMetadata>, 
+        IRepositoryFactory
+        where TEntity : class
     {
-        public RepositoryFactory(IEnumerable<Lazy<Func<IRepository>, RepositoryMetadata>> instanceDelegatesWithMetaData) : base(instanceDelegatesWithMetaData) { }
+        public RepositoryFactory(IEnumerable<Lazy<Func<IRepository<TEntity, TKey>>, RepositoryMetadata>> instanceDelegatesWithMetaData) 
+            : base(instanceDelegatesWithMetaData) { }
 
         protected override bool CheckMetadata<T>(RepositoryMetadata metadata)
         {

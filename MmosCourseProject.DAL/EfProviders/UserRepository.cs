@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class UserRepository : GenericRepository<User>, IUserRepository
+    public class UserRepository : EfGenericRepository<User, int>, IUserRepository
     {
-        public UserRepository(DbContext dbContext) : base(dbContext)
+        public UserRepository(MyTrelloContext dbContext) : base(dbContext)
         {
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace MmosCourseProject.DAL.Abstract
 {
-    public interface ITeamRepository : IRepository<Team>
+    public interface ITeamRepository : IRepository<Team, int>
     {
     }
 }

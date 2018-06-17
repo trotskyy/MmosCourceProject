@@ -7,7 +7,7 @@ using MmosCourseProject.DAL;
 
 namespace MmosCourseProject.DAL.Abstract
 {
-    public interface IChannelRepository : IRepository<Channel>
+    public interface IChannelRepository : IRepository<Channel, int>
     {
         /// <summary>
         /// Все учасники канала

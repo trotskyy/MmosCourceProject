@@ -50,8 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EfProviders\EfGenericRepository.cs" />
     <Compile Include="Abstract\GenericRepository.cs" />
-    <Compile Include="Abstract\GenericViewRepository.cs" />
+    <Compile Include="Abstract\GenericReadOnlyRepository.cs" />
     <Compile Include="Abstract\IChannelRepository.cs" />
     <Compile Include="Abstract\IChatMessageRepository.cs" />
     <Compile Include="Abstract\IRepository.cs" />
@@ -64,7 +65,7 @@
     <Compile Include="Abstract\IUnitOfWorkFactory.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Abstract\IUserTeamRepository.cs" />
-    <Compile Include="Abstract\IViewRepository.cs" />
+    <Compile Include="Abstract\IReadOnlyRepository.cs" />
     <Compile Include="Channel.cs">
       <DependentUpon>MyTrelloEDM.tt</DependentUpon>
     </Compile>

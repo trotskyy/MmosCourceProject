@@ -7,7 +7,7 @@ using MmosCourseProject.DAL;
 
 namespace MmosCourseProject.DAL.Abstract
 {
-    public interface ICommentRepository : IRepository<Comment>
+    public interface ICommentRepository : IRepository<Comment, int>
     {
     }
 }

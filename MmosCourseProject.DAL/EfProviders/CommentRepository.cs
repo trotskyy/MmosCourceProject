@@ -8,9 +8,9 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class CommentRepository : GenericRepository<Comment>, ICommentRepository
+    public class CommentRepository : EfGenericRepository<Comment, int>, ICommentRepository
     {
-        public CommentRepository(DbContext dbContext) : base(dbContext)
+        public CommentRepository(MyTrelloContext dbContext) : base(dbContext)
         {
         }
     }

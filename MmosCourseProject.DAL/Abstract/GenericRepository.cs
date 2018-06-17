@@ -10,46 +10,50 @@ using System.Data.Entity.Core.Objects;
 
 namespace MmosCourseProject.DAL.Abstract
 {
-    public abstract class GenericRepository<TEntity> : IRepository<TEntity>
+    public abstract class GenericRepository<TEntity, TKey, TDbContext> : GenericReadOnlyRepository<TEntity, TKey, TDbContext>, 
+        IRepository<TEntity, TKey>
         where TEntity:class
+        where TDbContext : DbContext
     {
-        protected DbContext _dbContext;
-        IDbSet<TEntity> _dbSet;
+        protected abstract void ValidateOnCreate(TEntity entity);
+        protected abstract void ValidateOnDelete(TEntity entity);
+        protected abstract void ValidateOnUpdate(TEntity entity);
 
-        protected GenericRepository(DbContext dbContext)
+        public GenericRepository(TDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
-            _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate = null)
+        public virtual void Create(TEntity entity)
         {
-            if (predicate != null)
-            {
-                return _dbSet.Where(predicate);
-            }
+            if (entity == null)
+                throw new ArgumentNullException();
 
-            return _dbSet.AsEnumerable();
-        }
+            ValidateOnCreate(entity);
 
-        public TEntity Get(Func<TEntity, bool> predicate)
-        {
-            return _dbSet.First(predicate);
-        }
-
-        public void Add(TEntity entity)
-        {
-            _dbSet.Add(entity);
-        }
-
-        public void Attach(TEntity entity)
-        {
-            _dbSet.Attach(entity);
+            _dbContext.Set<TEntity>().Add(entity);
         }
 
         public virtual void Delete(TEntity entity)
         {
-            _dbSet.Remove(entity);
+            if (entity == null)
+                throw new ArgumentNullException();
+
+            ValidateOnDelete(entity);
+
+            if (_dbContext.Entry<TEntity>(entity).State == EntityState.Detached)
+                _dbContext.Set<TEntity>().Attach(entity);
+            _dbContext.Set<TEntity>().Remove(entity);
+        }
+
+        public virtual void Update(TEntity entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException();
+
+            ValidateOnUpdate(entity);
+
+            _dbContext.Set<TEntity>().Attach(entity);
+            _dbContext.Entry<TEntity>(entity).State = EntityState.Modified;
         }
     }
 }

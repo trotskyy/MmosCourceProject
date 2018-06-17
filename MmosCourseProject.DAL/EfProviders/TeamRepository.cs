@@ -8,9 +8,9 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class TeamRepository : GenericRepository<Team>, ITeamRepository
+    public class TeamRepository : EfGenericRepository<Team, int>, ITeamRepository
     {
-        public TeamRepository(DbContext dbContext) : base(dbContext)
+        public TeamRepository(MyTrelloContext dbContext) : base(dbContext)
         {
         }
 
@@ -18,5 +18,6 @@ namespace MmosCourseProject.DAL.EfProviders
          * NOTE!
          * Due to absence of foreign key constraints in Teams table, hierarchical deletion is implemented by trigger
          */
+        
     }
 }

@@ -8,16 +8,13 @@ using System.Threading.Tasks;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class TaskRepository : GenericRepository<Task>, ITaskRepository
+    public class TaskRepository : EfGenericRepository<Task, int>, ITaskRepository
     {
-        public TaskRepository(DbContext dbContext) : base(dbContext) { }
+        public TaskRepository(MyTrelloContext dbContext) : base(dbContext) { }
 
         public override void Delete(Task entity)
         {
-            MyTrelloContext myTrelloContext = _dbContext as MyTrelloContext;
-            if (myTrelloContext == null)
-                throw new Exception("Invalid dbContext type");
-            myTrelloContext.DeleteTaskGraph(entity.Id);
+            _dbContext.DeleteTaskGraph(entity.Id);
         }
     }
 }

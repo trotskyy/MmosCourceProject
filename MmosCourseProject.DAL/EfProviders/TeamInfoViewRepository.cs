@@ -8,9 +8,9 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class TeamInfoViewRepository : GenericViewRepository<TeamInfoView, int>, ITeamInfoViewRepository
+    public class TeamInfoViewRepository : GenericReadOnlyRepository<TeamInfoView, int, MyTrelloContext>, ITeamInfoViewRepository
     {
-        public TeamInfoViewRepository(DbContext dbContext) : base(dbContext)
+        public TeamInfoViewRepository(MyTrelloContext dbContext) : base(dbContext)
         {
         }
     }

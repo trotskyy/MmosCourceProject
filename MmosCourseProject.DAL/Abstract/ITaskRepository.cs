@@ -6,7 +6,7 @@ using MmosCourseProject.DAL;
 
 namespace MmosCourseProject.DAL.Abstract
 {
-    public interface ITaskRepository : IRepository<Task>
+    public interface ITaskRepository : IRepository<Task, int>
     {
     }
 }

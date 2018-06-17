@@ -8,9 +8,9 @@ using MmosCourseProject.DAL.Abstract;
 
 namespace MmosCourseProject.DAL.EfProviders
 {
-    public class ChatMessageRepository : GenericRepository<ChatMessage>, IChatMessageRepository
+    public class ChatMessageRepository : EfGenericRepository<ChatMessage, int>, IChatMessageRepository
     {
-        public ChatMessageRepository(DbContext dbContext) : base(dbContext)
+        public ChatMessageRepository(MyTrelloContext dbContext) : base(dbContext)
         {
         }
     }

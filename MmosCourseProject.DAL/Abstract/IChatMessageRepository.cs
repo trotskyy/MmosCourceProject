@@ -7,7 +7,7 @@ using MmosCourseProject.DAL;
 
 namespace MmosCourseProject.DAL.Abstract
 {
-    public interface IChatMessageRepository : IRepository<ChatMessage>
+    public interface IChatMessageRepository : IRepository<ChatMessage, int>
     {
     }
 }
