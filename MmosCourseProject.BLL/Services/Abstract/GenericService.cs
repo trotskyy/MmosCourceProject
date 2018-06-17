@@ -64,15 +64,15 @@ namespace MmosCourseProject.BLL.Services.Abstract
             throw new DtoValidationFailedException(validationResults);
         }
 
-        /// <summary>
-        /// Validate using DomainModelValidationLibrary. Throws definied by you exceptions in case of validation failure
-        /// </summary>
-        /// <typeparam name="DbEntity"></typeparam>
-        /// <param name="entity"></param>
-        protected void ValidateDbEntity<DbEntity>(DbEntity entity, IUnitOfWork uow, ValidationType validationType)
-            where DbEntity : class
-        {
-            DomainModelValidator<IUnitOfWork>.Validate(entity, uow, validationType);
-        }
+        ///// <summary>
+        ///// Validate using DomainModelValidationLibrary. Throws definied by you exceptions in case of validation failure
+        ///// </summary>
+        ///// <typeparam name="DbEntity"></typeparam>
+        ///// <param name="entity"></param>
+        //protected void ValidateDbEntity<DbEntity>(DbEntity entity, IUnitOfWork uow, ValidationType validationType)
+        //    where DbEntity : class
+        //{
+        //    DomainModelValidator<IUnitOfWork>.Validate(entity, uow, validationType);
+        //}
     }
 }
