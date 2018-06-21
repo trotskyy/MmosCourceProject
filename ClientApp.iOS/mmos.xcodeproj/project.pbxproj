@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23007EF420DC3AC500288D62 /* CreateChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23007EF320DC3AC500288D62 /* CreateChannelViewController.swift */; };
+		23007EF620DC4C1800288D62 /* ViewChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23007EF520DC4C1800288D62 /* ViewChannelViewController.swift */; };
+		23007EF820DC5A1B00288D62 /* CreateTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23007EF720DC5A1B00288D62 /* CreateTaskViewController.swift */; };
+		23007EFA20DC680400288D62 /* CreateTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23007EF920DC680400288D62 /* CreateTeamViewController.swift */; };
 		231028B020BDB51E0012B7DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231028AF20BDB51E0012B7DA /* AppDelegate.swift */; };
 		231028B220BDB51E0012B7DA /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231028B120BDB51E0012B7DA /* ChannelsViewController.swift */; };
 		231028B420BDB51E0012B7DA /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231028B320BDB51E0012B7DA /* TasksViewController.swift */; };
@@ -19,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23007EF320DC3AC500288D62 /* CreateChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChannelViewController.swift; sourceTree = "<group>"; };
+		23007EF520DC4C1800288D62 /* ViewChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewChannelViewController.swift; sourceTree = "<group>"; };
+		23007EF720DC5A1B00288D62 /* CreateTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewController.swift; sourceTree = "<group>"; };
+		23007EF920DC680400288D62 /* CreateTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamViewController.swift; sourceTree = "<group>"; };
 		231028AC20BDB51E0012B7DA /* mmos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mmos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		231028AF20BDB51E0012B7DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		231028B120BDB51E0012B7DA /* ChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +88,10 @@
 				231028C320BDBB950012B7DA /* TeamsViewController.swift */,
 				236F649E20BDD29E00B3246A /* AuthViewController.swift */,
 				231969FA20BDF00A00D18F98 /* RegistrationViewController.swift */,
+				23007EF320DC3AC500288D62 /* CreateChannelViewController.swift */,
+				23007EF520DC4C1800288D62 /* ViewChannelViewController.swift */,
+				23007EF720DC5A1B00288D62 /* CreateTaskViewController.swift */,
+				23007EF920DC680400288D62 /* CreateTeamViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -159,8 +171,12 @@
 				231028B420BDB51E0012B7DA /* TasksViewController.swift in Sources */,
 				231028C420BDBB950012B7DA /* TeamsViewController.swift in Sources */,
 				236F649F20BDD29E00B3246A /* AuthViewController.swift in Sources */,
+				23007EF420DC3AC500288D62 /* CreateChannelViewController.swift in Sources */,
+				23007EF820DC5A1B00288D62 /* CreateTaskViewController.swift in Sources */,
+				23007EF620DC4C1800288D62 /* ViewChannelViewController.swift in Sources */,
 				231028B020BDB51E0012B7DA /* AppDelegate.swift in Sources */,
 				231028B220BDB51E0012B7DA /* ChannelsViewController.swift in Sources */,
+				23007EFA20DC680400288D62 /* CreateTeamViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
